@@ -82,6 +82,7 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Downloader verifies SHA-256 and falls back to OpenAI's Hugging Face copy of the same files |
 | 2026-11-01 | C2 baselines: constant answers and a rubric-only model that never reads the answer; a grader must beat both |
 | 2026-11-01 | C2 candidates: TF-IDF + logistic regression, and gradient-boosted trees on SVD text features (both classical, no embeddings); confirmed by owner. Optional #3 is now only the small PyTorch network on text embeddings |
+| 2026-11-01 | Compare with physicians on rows graded by 2+ physicians too (the only rows the ceiling uses), and report a pooled-pairs physician score next to the per-physician mean |
 | 2026-11-01 | Train on soft labels (share of physicians who said "met"); split, CV and bootstrap all grouped by conversation |
 
 ## Data facts (from OpenAI's reference loader)
@@ -94,10 +95,13 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
 ## Status
 
 - [x] Repo skeleton, loader, trust metrics, review-budget simulation, 213 passing tests
-- [ ] Download data. Needs `openaipublic.blob.core.windows.net` or, for the Hugging Face copy,
-      `huggingface.co` + `us.aws.cdn.hf.co` allowed. A policy change seems to apply only to new sessions.
+- [ ] Download data. Still blocked on 2026-11-01: `openaipublic.blob.core.windows.net` and
+      `us.aws.cdn.hf.co` are refused by the network policy. `huggingface.co` itself is reachable
+      (it serves the file list and redirects the download to `us.aws.cdn.hf.co`).
+- [x] Checksums in `data.py` confirmed to equal the LFS SHA-256 values from the Hugging Face API
 - [ ] C1 exploration and label definitions (`scripts/explore_data.py` ready; needs data)
-- [~] C2 classical grader: code, protocol and tests done on synthetic data; not yet run on HealthBench
+- [~] C2 classical grader: code, protocol and tests done on synthetic data; not yet run on HealthBench.
+      Results also report scores on rows graded by 2+ physicians, and a pooled-pairs physician score
 - [ ] C3–C5 results
 - [ ] C6 demo
 - [ ] C7 write-up

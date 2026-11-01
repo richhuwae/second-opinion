@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 
 from second_opinion import grader
-from second_opinion.experiment import physician_ceiling, run_experiment
+from second_opinion.experiment import physician_ceiling, physician_pooled, run_experiment
 
 TOPICS = ["hydration", "ibuprofen", "emergency", "allergy", "sleep", "vaccine", "insulin", "fever"]
 
@@ -129,3 +129,18 @@ def test_run_experiment_end_to_end():
     assert g["f1_balanced"] > b["rubric_only"] + 0.15
     assert out["data"]["n_train_rows"] + out["data"]["n_test_rows"] == len(df)
     assert out["by_category"] and all(r["n_rows"] >= 10 for r in out["by_category"])
+    m = out["multi_physician_rows"]
+    assert 0 < m["n_rows"] < out["data"]["n_test_rows"]
+    assert m["grader_f1"] > m["rubric_only_f1"]
+    lo, hi = m["grader_f1_ci95"]
+    assert lo <= m["grader_f1"] <= hi
+    # Synthetic physicians agree 90% of the time.
+    assert 0.75 < m["physician_pooled_f1"] <= 1
+
+
+def test_physician_pooled():
+    df = pd.DataFrame({"labels": [[True, True], [False, False], [True], [True, False]]})
+    # Pairs: (T,T) (T,T) (F,F) (F,F) (T,F) (F,T); single-label row ignored.
+    # pos: precision 2/3, recall 2/3; neg: same -> balanced F1 = 2/3.
+    assert abs(physician_pooled(df) - 2 / 3) < 1e-9
+    assert physician_pooled(pd.DataFrame({"labels": [[True]]})) is None

@@ -17,6 +17,11 @@ from second_opinion.experiment import run_experiment
 RESULTS = Path(__file__).resolve().parents[1] / "results" / "grader_classical.json"
 
 
+def fmt(x) -> str:
+    """Three decimals, or 'undefined' (e.g. balanced F1 of a constant answer)."""
+    return "undefined" if x is None else f"{x:.3f}"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--quick", action="store_true", help="3 folds, 200 bootstraps, logreg only")
@@ -44,11 +49,21 @@ def main() -> int:
     g, b, c = out["grader"], out["baselines"], out["physician_ceiling"]
     lo, hi = g["f1_balanced_ci95"]
     print(f"\nPairwise balanced F1 on {out['data']['n_test_rows']:,} held-out rows")
-    print(f"  grader ({g['kind']}): {g['f1_balanced']:.3f}  (95% CI {lo:.3f}-{hi:.3f})")
-    print(f"  rubric-only baseline: {b['rubric_only']:.3f}")
-    print(f"  always 'met':         {b['always_met']:.3f}")
-    print(f"  physicians (mean of {c['n_physicians']}): {c['mean']:.3f}")
-    print(f"  calibration error:    {g['ece_vs_physicians']:.3f}")
+    print(f"  grader ({g['kind']}): {fmt(g['f1_balanced'])}  (95% CI {lo:.3f}-{hi:.3f})")
+    print(f"  rubric-only baseline: {fmt(b['rubric_only'])}")
+    print(f"  always 'met':         {fmt(b['always_met'])}")
+    print(f"  physicians (mean of {c['n_physicians']}): {fmt(c['mean'])}")
+    print(f"  physicians (pooled pairs): {fmt(out['physician_pooled_f1'])}")
+    print(f"  calibration error:    {fmt(g['ece_vs_physicians'])}")
+    m = out["multi_physician_rows"]
+    if m.get("grader_f1") is not None:
+        lo, hi = m["grader_f1_ci95"]
+        print(f"\nOnly the {m['n_rows']:,} held-out rows graded by 2+ physicians")
+        print(f"  grader:               {fmt(m['grader_f1'])}  (95% CI {lo:.3f}-{hi:.3f})")
+        print(f"  rubric-only baseline: {fmt(m['rubric_only_f1'])}")
+        print(f"  physicians (pooled pairs): {fmt(m['physician_pooled_f1'])}")
+        print(f"  physicians (mean of {m['physician_ceiling']['n_physicians']}): "
+              f"{fmt(m['physician_ceiling']['mean'])}")
     print(f"\nWrote {RESULTS}")
     return 0
 

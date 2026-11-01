@@ -46,6 +46,48 @@ def physician_ceiling(df: pd.DataFrame, min_rows: int = 10) -> dict[str, float]:
     }
 
 
+def physician_pooled(df: pd.DataFrame) -> float | None:
+    """Physician-vs-colleagues balanced F1 with all leave-one-out pairs pooled.
+
+    ``physician_ceiling`` averages one score per physician; this pools every
+    (physician label, colleague label) pair instead, the same way the grader's
+    score pools (prediction, physician label) pairs.
+    """
+    own, others = [], []
+    for row_labels in df["labels"]:
+        for i in range(len(row_labels)):
+            rest = list(row_labels[:i]) + list(row_labels[i + 1 :])
+            if rest:
+                own.append(row_labels[i])
+                others.append(rest)
+    return _f1(own, others) if own else None
+
+
+def _multi_physician(
+    df: pd.DataFrame, preds: dict[str, np.ndarray], n_boot: int, seed: int
+) -> dict:
+    """Scores on rows graded by 2+ physicians: the rows the ceiling is defined on."""
+    idx = np.flatnonzero(df["n_physicians"].to_numpy() >= 2)
+    sub = df.iloc[idx].reset_index(drop=True)
+    out: dict = {"n_rows": int(len(idx))}
+    if len(idx) == 0:
+        return out
+    labels = list(sub["labels"])
+    groups = grader.group_key(sub)
+    for name, p in preds.items():
+        p = p[idx]
+        out[f"{name}_f1"] = _f1(p, labels)
+        out[f"{name}_f1_ci95"] = list(
+            group_bootstrap_ci(
+                lambda i: _f1(p[i], [labels[j] for j in i]),
+                len(sub), groups, n_boot=n_boot, seed=seed,
+            )
+        )
+    out["physician_pooled_f1"] = physician_pooled(sub)
+    out["physician_ceiling"] = physician_ceiling(sub)
+    return out
+
+
 def _by_category(df: pd.DataFrame, preds: np.ndarray, min_rows: int) -> list[dict]:
     rows = []
     for cat, idx in df.groupby("category").indices.items():
@@ -117,7 +159,9 @@ def run_experiment(
 
     best_preds = results[best].pop("_preds")
     rubric_only = results["rubric_only"]
-    rubric_only.pop("_preds")
+    rubric_only_preds = rubric_only.pop("_preds")
+    if "n_physicians" not in test:
+        test["n_physicians"] = test["labels"].map(len)
     baselines = {
         "always_met": _f1(np.ones(len(test), bool), labels),
         "always_not_met": _f1(np.zeros(len(test), bool), labels),
@@ -137,5 +181,9 @@ def run_experiment(
         "grader": {"kind": best, **results[best]},
         "baselines": baselines,
         "physician_ceiling": physician_ceiling(test),
+        "physician_pooled_f1": physician_pooled(test),
+        "multi_physician_rows": _multi_physician(
+            test, {"grader": best_preds, "rubric_only": rubric_only_preds}, n_boot, seed
+        ),
         "by_category": _by_category(test, best_preds, min_category_rows),
     }

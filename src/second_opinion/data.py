@@ -29,7 +29,8 @@ FILES = {
     # Full benchmark: conversations with their complete rubrics and theme tags.
     "eval": "2025-05-07-06-14-12_oss_eval.jsonl",
 }
-# SHA-256 of each file, as listed by the openai/healthbench Hugging Face repo.
+# SHA-256 of each file: the Git LFS oid that huggingface.co/api/datasets/openai/healthbench/tree/main
+# reports for it (checked 2026-11-01; the LFS oid is the file's SHA-256).
 # Checked after every download so a mirror can never silently change the data.
 SHA256 = {
     "meta_eval": "6a343ed3fcb6f28353c2c6c157ae30ddf2db874c947b27ba474ad54da9c5dbac",
