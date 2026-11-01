@@ -91,3 +91,15 @@ def test_group_bootstrap_contains_point_estimate():
     groups = np.repeat(np.arange(100), 5)
     lo, hi = group_bootstrap_ci(lambda idx: y[idx].mean(), len(y), groups, n_boot=300)
     assert lo < y.mean() < hi
+
+
+def test_pooled_kappas():
+    import pandas as pd
+
+    from second_opinion.experiment import kappa_vs_physicians, physician_pooled_kappa
+
+    labels = [[True, True], [False, False], [True, False], [False, True]]
+    # Perfect copy of the first physician vs both physicians.
+    assert kappa_vs_physicians([True, False, True, False], labels) == pytest.approx(0.5)
+    # Physicians agree on 2 of 4 rows, marginals 50/50 -> kappa 0.
+    assert physician_pooled_kappa(pd.DataFrame({"labels": labels})) == pytest.approx(0.0)

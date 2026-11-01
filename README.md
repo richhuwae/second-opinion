@@ -27,8 +27,8 @@ That raises three questions:
 
 | Stage | Question | Status |
 |---|---|---|
-| Data | Physician-graded health conversations, cleaned and validated | 🟡 loader built and tested; data not yet downloaded |
-| Quality grader | Does an answer meet a physician-written criterion? Classical models first | ⬜ |
+| Data | Physician-graded health conversations, cleaned and validated | 🟡 loader and checksum-verified downloader built and tested; data not yet downloaded |
+| Quality grader | Does an answer meet a physician-written criterion? Classical models first | 🟡 TF-IDF + logistic regression and gradient-boosted trees built and tested on synthetic data; not yet run on HealthBench |
 | Trust check | Agreement with physicians vs. physician-to-physician agreement, calibration | 🟡 metrics built and verified against OpenAI's reference code |
 | Safety alarm | Which conversations should a doctor see, given a fixed review capacity? | 🟡 review-budget simulation built and tested |
 | Cost view | Cost and doctor time per 1,000 conversations | 🟡 built into the budget simulation |
@@ -55,14 +55,40 @@ metric applied to each physician against their colleagues gives the **human
 ceiling**. `tests/test_metrics.py` checks the implementation against a verbatim
 copy of OpenAI's reference code on 200 random cases.
 
+## How the classical grader works
+
+`src/second_opinion/grader.py` predicts, for one (conversation, answer,
+criterion) row, the probability that physicians would mark the criterion met.
+
+- **Features**: TF-IDF of the criterion, the answer and the conversation, the
+  theme tag, and hand-built features that relate the criterion to the answer
+  (word overlap, whether the criterion is phrased negatively such as "Fails
+  to...", answer length, questions asked back, hedging, emergency wording).
+- **Models**: logistic regression, and gradient-boosted trees on an SVD summary
+  of the text plus the same hand-built features.
+- **Soft labels**: a row met for 2 of 3 physicians trains as "met" with weight
+  2/3 and "not met" with weight 1/3, so disagreement is learned, not hidden.
+- **Honest evaluation** (`src/second_opinion/experiment.py`): conversations are
+  split 80/20 so none appears in both; the model and its threshold are chosen
+  by grouped 5-fold cross-validation on the training split only; the test split
+  is scored once. Reported next to it: a **rubric-only** baseline that never
+  reads the answer (a grader that cannot beat it is not grading the answer),
+  constant baselines, the physician ceiling on the same test rows, calibration
+  error, a conversation-level bootstrap CI and results per theme.
+
 ## Reproduce
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest
-python scripts/download_data.py
+python scripts/download_data.py   # checks SHA-256 against OpenAI's published hashes
+python scripts/train_grader.py     # full protocol; add --quick for a shorter check
 ```
+
+`download_data.py` tries OpenAI's blob storage first, then OpenAI's own
+[Hugging Face copy](https://huggingface.co/datasets/openai/healthbench) of the
+same files. Results are written to `results/grader_classical.json`.
 
 ## Principles
 

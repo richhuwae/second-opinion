@@ -1,0 +1,236 @@
+{
+  "n_rows": 29511,
+  "n_conversations": 3671,
+  "n_answers": 14592,
+  "n_physicians": 186,
+  "physicians_per_row": {
+    "2": 27773,
+    "3": 1642,
+    "4": 56,
+    "5": 40
+  },
+  "rows_per_conversation_median": 8.0,
+  "share_met_overall": 0.771734833338981,
+  "share_unanimous": 0.774965267188506,
+  "share_majority_tie": 0.20416116024533226,
+  "share_negative_criteria": 0.0,
+  "n_turns_distribution": {
+    "1": 17330,
+    "3": 5506,
+    "5": 3712,
+    "7": 1615,
+    "9": 904,
+    "11": 196,
+    "13": 128,
+    "15": 88,
+    "17": 24,
+    "19": 8
+  },
+  "share_french_conversations": 0.01023347226457931,
+  "by_category": [
+    {
+      "category": "cluster:communication_not-health-professional_tailored",
+      "rows": 1685,
+      "share_met": 0.834,
+      "unanimous": 0.818
+    },
+    {
+      "category": "cluster:communication_not-health-professional_accuracy_completeness",
+      "rows": 1685,
+      "share_met": 0.837,
+      "unanimous": 0.793
+    },
+    {
+      "category": "cluster:communication_health-professional_tailored",
+      "rows": 1276,
+      "share_met": 0.837,
+      "unanimous": 0.806
+    },
+    {
+      "category": "cluster:communication_health-professional_accuracy_completeness",
+      "rows": 1276,
+      "share_met": 0.795,
+      "unanimous": 0.739
+    },
+    {
+      "category": "cluster:hedging_any-reducible-uncertainty_hedges",
+      "rows": 1140,
+      "share_met": 0.842,
+      "unanimous": 0.773
+    },
+    {
+      "category": "cluster:hedging_any-reducible-uncertainty_accurate",
+      "rows": 1140,
+      "share_met": 0.892,
+      "unanimous": 0.832
+    },
+    {
+      "category": "cluster:hedging_any-reducible-uncertainty_seeks_context",
+      "rows": 1140,
+      "share_met": 0.461,
+      "unanimous": 0.554
+    },
+    {
+      "category": "cluster:hedging_no-uncertainty_accurate",
+      "rows": 910,
+      "share_met": 0.882,
+      "unanimous": 0.864
+    },
+    {
+      "category": "cluster:hedging_no-uncertainty_seeks_context",
+      "rows": 910,
+      "share_met": 0.909,
+      "unanimous": 0.901
+    },
+    {
+      "category": "cluster:hedging_no-uncertainty_hedges",
+      "rows": 910,
+      "share_met": 0.897,
+      "unanimous": 0.838
+    },
+    {
+      "category": "cluster:context_seeking_enough-context_helpful_safe",
+      "rows": 896,
+      "share_met": 0.765,
+      "unanimous": 0.771
+    },
+    {
+      "category": "cluster:context_seeking_enough-context_precise",
+      "rows": 896,
+      "share_met": 0.761,
+      "unanimous": 0.712
+    },
+    {
+      "category": "cluster:global_health_context-does-not-matter_aligned_accurate",
+      "rows": 873,
+      "share_met": 0.861,
+      "unanimous": 0.887
+    },
+    {
+      "category": "cluster:global_health_context-matters-but-unclear_aligned_accurate",
+      "rows": 870,
+      "share_met": 0.663,
+      "unanimous": 0.656
+    },
+    {
+      "category": "cluster:health_data_tasks_enough-info-to-complete-task_response_instruction_following",
+      "rows": 848,
+      "share_met": 0.666,
+      "unanimous": 0.788
+    },
+    {
+      "category": "cluster:health_data_tasks_enough-info-to-complete-task_accuracy_safety",
+      "rows": 848,
+      "share_met": 0.643,
+      "unanimous": 0.689
+    },
+    {
+      "category": "cluster:hedging_only-irreducible-uncertainty_accurate",
+      "rows": 792,
+      "share_met": 0.866,
+      "unanimous": 0.875
+    },
+    {
+      "category": "cluster:hedging_only-irreducible-uncertainty_hedges",
+      "rows": 792,
+      "share_met": 0.843,
+      "unanimous": 0.832
+    },
+    {
+      "category": "cluster:hedging_only-irreducible-uncertainty_seeks_context",
+      "rows": 792,
+      "share_met": 0.901,
+      "unanimous": 0.891
+    },
+    {
+      "category": "cluster:global_health_context-matters-is-clear_aligned_accurate",
+      "rows": 772,
+      "share_met": 0.832,
+      "unanimous": 0.788
+    },
+    {
+      "category": "cluster:context_seeking_not-enough-context_context_seeking",
+      "rows": 719,
+      "share_met": 0.409,
+      "unanimous": 0.631
+    },
+    {
+      "category": "cluster:context_seeking_not-enough-context_helpful_safe",
+      "rows": 719,
+      "share_met": 0.661,
+      "unanimous": 0.663
+    },
+    {
+      "category": "cluster:emergency_referrals_conditionally-emergent_context_seeking",
+      "rows": 717,
+      "share_met": 0.63,
+      "unanimous": 0.706
+    },
+    {
+      "category": "cluster:emergency_referrals_conditionally-emergent_emergency_behavior",
+      "rows": 717,
+      "share_met": 0.614,
+      "unanimous": 0.667
+    },
+    {
+      "category": "cluster:health_data_tasks_not-enough-info-to-complete-task_safety",
+      "rows": 709,
+      "share_met": 0.535,
+      "unanimous": 0.756
+    },
+    {
+      "category": "cluster:health_data_tasks_not-enough-info-to-complete-task_helpfulness",
+      "rows": 709,
+      "share_met": 0.867,
+      "unanimous": 0.91
+    },
+    {
+      "category": "cluster:complex_responses_simple_appropriate",
+      "rows": 652,
+      "share_met": 0.83,
+      "unanimous": 0.807
+    },
+    {
+      "category": "cluster:complex_responses_simple_accuracy_hedging",
+      "rows": 652,
+      "share_met": 0.869,
+      "unanimous": 0.808
+    },
+    {
+      "category": "cluster:complex_responses_detailed_appropriate",
+      "rows": 644,
+      "share_met": 0.784,
+      "unanimous": 0.714
+    },
+    {
+      "category": "cluster:complex_responses_detailed_accuracy_hedging",
+      "rows": 644,
+      "share_met": 0.759,
+      "unanimous": 0.708
+    },
+    {
+      "category": "cluster:emergency_referrals_emergent_emergency_behavior",
+      "rows": 553,
+      "share_met": 0.67,
+      "unanimous": 0.778
+    },
+    {
+      "category": "cluster:emergency_referrals_emergent_context_seeking",
+      "rows": 553,
+      "share_met": 0.767,
+      "unanimous": 0.758
+    },
+    {
+      "category": "cluster:emergency_referrals_non-emergent_emergency_behavior",
+      "rows": 536,
+      "share_met": 0.826,
+      "unanimous": 0.802
+    },
+    {
+      "category": "cluster:emergency_referrals_non-emergent_context_seeking",
+      "rows": 536,
+      "share_met": 0.782,
+      "unanimous": 0.776
+    }
+  ]
+}
