@@ -95,13 +95,15 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
 ## Status
 
 - [x] Repo skeleton, loader, trust metrics, review-budget simulation, 213 passing tests
-- [ ] Download data. Still blocked on 2026-11-01: `openaipublic.blob.core.windows.net` and
-      `us.aws.cdn.hf.co` are refused by the network policy. `huggingface.co` itself is reachable
-      (it serves the file list and redirects the download to `us.aws.cdn.hf.co`).
-- [x] Checksums in `data.py` confirmed to equal the LFS SHA-256 values from the Hugging Face API
-- [ ] C1 exploration and label definitions (`scripts/explore_data.py` ready; needs data)
-- [~] C2 classical grader: code, protocol and tests done on synthetic data; not yet run on HealthBench.
-      Results also report scores on rows graded by 2+ physicians, and a pooled-pairs physician score
+- [x] Download data (2026-11-01, after the network policy was opened; checksums verified)
+- [~] C1 exploration: `results/data_summary.json` written. Every row has 2+ physicians, so the
+      "2+ physician" slice equals the full test set. The "negative criteria" share is a keyword
+      artifact (almost every rubric says "should not be overly verbose") and needs fixing.
+      Label definitions for "unsafe" and "good" still to write
+- [x] C2 classical grader run on HealthBench: `results/grader_classical.json` (full run; gradient
+      boosting chosen by cross-validation over logistic regression). Beats the rubric-only baseline;
+      overall level with the per-physician mean but below the pooled physician score, and below
+      physicians in most themes. Not yet reviewed by the owner; no numbers in the README yet
 - [ ] C3–C5 results
 - [ ] C6 demo
 - [ ] C7 write-up
