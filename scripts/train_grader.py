@@ -55,6 +55,11 @@ def main() -> int:
     print(f"  physicians (mean of {c['n_physicians']}): {fmt(c['mean'])}")
     print(f"  physicians (pooled pairs): {fmt(out['physician_pooled_f1'])}")
     print(f"  calibration error:    {fmt(g['ece_vs_physicians'])}")
+    klo, khi = g["kappa_ci95"]
+    print("\nCohen's kappa (all pairs pooled)")
+    print(f"  grader vs physicians:     {fmt(g['kappa_vs_physicians'])}  (95% CI {klo:.3f}-{khi:.3f})")
+    print(f"  rubric-only vs physicians: {fmt(b['rubric_only_kappa'])}")
+    print(f"  physician vs colleague:   {fmt(out['physician_pooled_kappa'])}")
     print(f"\nWrote {RESULTS}")
     return 0
 

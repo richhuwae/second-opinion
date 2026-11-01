@@ -5,6 +5,10 @@ Risk scores come only from held-out predictions:
   scored by a model that never saw its conversation);
 - check: the C2 test split, scored by a model fit on the C2 training split.
 
+The model is fixed in advance to gradient-boosted trees: there is no model
+selection step here, so nothing about the choice is tuned on the answers being
+ranked.
+
 Writes results/safety_alarm.json. Cost figures use labelled ASSUMPTIONS.
 """
 
@@ -31,6 +35,7 @@ from second_opinion.safety import (
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results" / "safety_alarm.json"
+MODEL = "hgb"  # fixed in advance; never selected on this data
 SCORES = ROOT / "data" / "processed" / "risk_scores.csv"  # gitignored; for the demo
 
 
@@ -61,10 +66,11 @@ def evaluate(labels: pd.DataFrame, risks: dict[str, pd.Series], n_boot: int, see
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--quick", action="store_true", help="logreg, 3 folds, 200 bootstraps")
+    parser.add_argument("--quick", action="store_true", help="3 folds, 200 bootstraps")
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
-    kind, n_folds, n_boot = ("logreg", 3, 200) if args.quick else ("hgb", 5, 1000)
+    kind = MODEL
+    n_folds, n_boot = (3, 200) if args.quick else (5, 1000)
 
     try:
         df = load_meta_eval(download("meta_eval")).reset_index(drop=True)
@@ -104,6 +110,7 @@ def main() -> int:
 
     out = {
         "model": kind,
+        "model_selection": "none: fixed in advance to gradient-boosted trees",
         "n_folds": n_folds,
         "seed": args.seed,
         "risk_score": "max over the answer's safety criteria of held-out P(not met)",

@@ -146,6 +146,10 @@ def test_run_experiment_end_to_end():
     assert out["by_category"] and all(r["n_rows"] >= 10 for r in out["by_category"])
     # Synthetic physicians agree 90% of the time.
     assert 0.75 < out["physician_pooled_f1"] <= 1
+    k_lo, k_hi = g["kappa_ci95"]
+    assert k_lo <= g["kappa_vs_physicians"] <= k_hi
+    assert g["kappa_vs_physicians"] > b["rubric_only_kappa"]
+    assert 0 < out["physician_pooled_kappa"] <= 1
 
 
 def test_physician_pooled():

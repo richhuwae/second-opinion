@@ -20,6 +20,7 @@ import pandas as pd
 
 from second_opinion import grader
 from second_opinion.metrics import (
+    cohen_kappa,
     expected_calibration_error,
     group_bootstrap_ci,
     pairwise_agreement,
@@ -61,6 +62,28 @@ def physician_pooled(df: pd.DataFrame) -> float | None:
                 own.append(row_labels[i])
                 others.append(rest)
     return _f1(own, others) if own else None
+
+
+def kappa_vs_physicians(preds, labels) -> float:
+    """Cohen's kappa over every (prediction, physician label) pair."""
+    a = [bool(p) for p, row in zip(preds, labels) for _ in row]
+    b = [bool(x) for row in labels for x in row]
+    return cohen_kappa(a, b)
+
+
+def physician_pooled_kappa(df: pd.DataFrame) -> float | None:
+    """Cohen's kappa over every ordered (physician, colleague) pair on a row.
+
+    Pooled the same way as ``kappa_vs_physicians``, so the two are comparable.
+    """
+    a, b = [], []
+    for row in df["labels"]:
+        for i in range(len(row)):
+            for j in range(len(row)):
+                if i != j:
+                    a.append(bool(row[i]))
+                    b.append(bool(row[j]))
+    return cohen_kappa(a, b) if a else None
 
 
 def _by_category(df: pd.DataFrame, preds: np.ndarray, min_rows: int) -> list[dict]:
@@ -123,10 +146,16 @@ def run_experiment(
             lambda idx: _f1(preds[idx], [labels[i] for i in idx]),
             len(test), groups, n_boot=n_boot, seed=seed,
         )
+        k_lo, k_hi = group_bootstrap_ci(
+            lambda idx: kappa_vs_physicians(preds[idx], [labels[i] for i in idx]),
+            len(test), groups, n_boot=n_boot, seed=seed,
+        )
         results[kind] = {
             "threshold": threshold,
             **pairwise_agreement(list(preds), labels),
             "f1_balanced_ci95": [lo, hi],
+            "kappa_vs_physicians": kappa_vs_physicians(preds, labels),
+            "kappa_ci95": [k_lo, k_hi],
             "ece_vs_physicians": expected_calibration_error(p_rep, y_rep),
             "seconds_per_1000_rows": 1000 * seconds / len(test),
         }
@@ -142,6 +171,8 @@ def run_experiment(
         "always_not_met": _f1(np.zeros(len(test), bool), labels),
         "rubric_only": rubric_only["f1_balanced"],
         "rubric_only_ci95": rubric_only["f1_balanced_ci95"],
+        "rubric_only_kappa": rubric_only["kappa_vs_physicians"],
+        "rubric_only_kappa_ci95": rubric_only["kappa_ci95"],
     }
     return {
         "data": {
@@ -157,5 +188,6 @@ def run_experiment(
         "baselines": baselines,
         "physician_ceiling": physician_ceiling(test),
         "physician_pooled_f1": physician_pooled(test),
+        "physician_pooled_kappa": physician_pooled_kappa(test),
         "by_category": _by_category(test, best_preds, min_category_rows),
     }
