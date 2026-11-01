@@ -91,6 +91,7 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Cohen's kappa in C3 pools every (prediction, physician) pair, and every ordered (physician, colleague) pair for the physician figure, so the two are comparable |
 | 2026-11-01 | Demo ships the exact C2 model (fit on the C2 training split; its test score is checked against the results before saving), 16.3 MB at full precision, plus precomputed held-out scores. No training at startup. Examples come from the C2 test split |
 | 2026-11-01 | Commit 24 HealthBench examples and the 12 criterion texts with the canary string on every row, and a NOTICE with OpenAI's MIT notice (`app/assets/NOTICE`) |
+| 2026-11-01 | The package never builds paths from its own `__file__` (a normal pip install puts it in site-packages). The app and scripts pass repository paths based on their own location; a test enforces this and runs the app with the package imported from outside the repo |
 | 2026-11-01 | Hosting: Streamlit Community Cloud, deployed from main after the PR is merged |
 | 2026-11-01 | C5 cost figures use assumed 4 min per review and EUR 90 per physician hour, labelled as assumptions |
 | 2026-11-01 | Negative-criterion flag reads only a criterion's opening words ("Fails to...", "Does not..."). Meta-eval criteria are all positive (+5-point cluster criteria in the eval file), so the flag is 0 there; rerunning the grader changed nothing for the chosen model |
@@ -122,7 +123,8 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
       in the main result and the sensitivity check; well below perfect ranking. Not yet reviewed
       by the owner; no numbers in the README yet
 - [~] C6 demo built: `app/streamlit_app.py`, assets from `scripts/build_demo_assets.py`, smoke tests
-      in `tests/test_demo.py`, screenshots in `docs/screenshots/`. Not deployed yet (after merge)
+      in `tests/test_demo.py`, screenshots in `docs/screenshots/`. Verified with a Cloud-style install (fresh venv,
+      `pip install -r requirements.txt`, no -e): all four pages load. Not deployed yet (after merge)
 - [ ] C7 write-up
 
 ## Open questions
