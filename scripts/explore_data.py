@@ -10,12 +10,13 @@ from pathlib import Path
 from second_opinion.data import download, load_meta_eval
 from second_opinion.explore import summarize
 
+RAW = Path(__file__).resolve().parents[1] / "data" / "raw"
 OUT = Path(__file__).resolve().parents[1] / "results" / "data_summary.json"
 
 
 def main() -> int:
     try:
-        df = load_meta_eval(download("meta_eval"))
+        df = load_meta_eval(download("meta_eval", RAW))
     except OSError as exc:
         print(f"Could not get the meta-eval file ({exc}).", file=sys.stderr)
         return 1

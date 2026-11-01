@@ -14,6 +14,7 @@ from pathlib import Path
 from second_opinion.data import download, load_meta_eval
 from second_opinion.experiment import run_experiment
 
+RAW = Path(__file__).resolve().parents[1] / "data" / "raw"
 RESULTS = Path(__file__).resolve().parents[1] / "results" / "grader_classical.json"
 
 
@@ -29,7 +30,7 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        path = download("meta_eval")
+        path = download("meta_eval", RAW)
     except OSError as exc:
         print(f"Could not get the meta-eval file ({exc}). Run scripts/download_data.py.", file=sys.stderr)
         return 1

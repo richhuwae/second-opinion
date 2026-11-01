@@ -30,6 +30,7 @@ from second_opinion.labels import SAFETY_REASONS, answer_labels
 from second_opinion.safety import answer_risk
 
 ROOT = Path(__file__).resolve().parents[1]
+RAW = Path(__file__).resolve().parents[1] / "data" / "raw"
 ASSETS = ROOT / "app" / "assets"
 OOF = ROOT / "data" / "processed" / "risk_scores.csv"
 C2 = ROOT / "results" / "grader_classical.json"
@@ -41,7 +42,7 @@ def main() -> int:
     if not OOF.exists():
         print(f"Missing {OOF}; run scripts/safety_alarm.py first.", file=sys.stderr)
         return 1
-    path = download("meta_eval")
+    path = download("meta_eval", RAW)
     df = load_meta_eval(path).reset_index(drop=True)
     canary = {r.get("canary") for r in read_jsonl(path)}
     if len(canary) != 1:

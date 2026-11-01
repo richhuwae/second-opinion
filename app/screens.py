@@ -8,6 +8,7 @@ scripts/build_demo_assets.py.
 from __future__ import annotations
 
 import re
+from pathlib import Path
 import joblib
 import pandas as pd
 import plotly.express as px
@@ -15,8 +16,6 @@ import streamlit as st
 
 from second_opinion.budget import CostAssumptions
 from second_opinion.demo import (
-    ASSETS,
-    ROOT,
     alarm_threshold,
     budget_table,
     build_input,
@@ -29,6 +28,12 @@ from second_opinion.demo import (
 from second_opinion.grader import predict_proba
 
 REPO = "https://github.com/richhuwae/second-opinion"
+# All paths come from this file's location (the repository checkout), never
+# from the installed package's location.
+APP_DIR = Path(__file__).resolve().parent
+ASSETS = APP_DIR / "assets"
+RESULTS = APP_DIR.parent / "results"
+DOCS = APP_DIR.parent / "docs"
 
 
 @st.cache_resource
@@ -38,12 +43,12 @@ def model():
 
 @st.cache_data
 def assets():
-    return load_assets()
+    return load_assets(ASSETS)
 
 
 @st.cache_data
 def results():
-    return load_results()
+    return load_results(RESULTS)
 
 
 A, R = assets(), results()
@@ -247,7 +252,7 @@ def screen_under_the_hood():
                        ("also physicians split (sensitivity)", "sensitivity_contested_is_unsafe"))],
         hide_index=True, use_container_width=True)
     st.subheader("Limitations")
-    text = (ROOT / "docs" / "labels.md").read_text()
+    text = (DOCS / "labels.md").read_text()
     lim = re.split(r"^## Limitations\s*$", text, flags=re.M)
     st.markdown(lim[1] if len(lim) > 1 else "See docs/labels.md.")
     st.markdown(

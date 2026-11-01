@@ -34,6 +34,7 @@ from second_opinion.safety import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+RAW = Path(__file__).resolve().parents[1] / "data" / "raw"
 RESULTS = ROOT / "results" / "safety_alarm.json"
 MODEL = "hgb"  # fixed in advance; never selected on this data
 SCORES = ROOT / "data" / "processed" / "risk_scores.csv"  # gitignored; for the demo
@@ -73,7 +74,7 @@ def main() -> int:
     n_folds, n_boot = (3, 200) if args.quick else (5, 1000)
 
     try:
-        df = load_meta_eval(download("meta_eval")).reset_index(drop=True)
+        df = load_meta_eval(download("meta_eval", RAW)).reset_index(drop=True)
     except OSError as exc:
         print(f"Could not get the meta-eval file ({exc}).", file=sys.stderr)
         return 1

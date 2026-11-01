@@ -1,7 +1,9 @@
 """Logic behind the Streamlit demo, kept out of the UI so it can be tested.
 
 Everything here works on precomputed files in app/assets/ (built by
-scripts/build_demo_assets.py); nothing is trained at startup.
+scripts/build_demo_assets.py); nothing is trained at startup. Callers pass the
+folders: the package never resolves paths from its own location, because a
+normal pip install puts it in site-packages, away from the repository files.
 """
 
 from __future__ import annotations
@@ -14,12 +16,7 @@ import pandas as pd
 
 from second_opinion.budget import CostAssumptions, expected_caught
 
-ROOT = Path(__file__).resolve().parents[2]
-ASSETS = ROOT / "app" / "assets"
-RESULTS = ROOT / "results"
-
-
-def load_assets(assets: Path = ASSETS) -> dict:
+def load_assets(assets: Path) -> dict:
     """Small files only; the model is loaded separately (it is larger)."""
     examples = [json.loads(line) for line in (assets / "examples.jsonl").read_text().splitlines() if line]
     return {
@@ -29,7 +26,7 @@ def load_assets(assets: Path = ASSETS) -> dict:
     }
 
 
-def load_results(results: Path = RESULTS) -> dict:
+def load_results(results: Path) -> dict:
     return {name: json.loads((results / f"{name}.json").read_text())
             for name in ("grader_classical", "safety_alarm", "label_summary", "data_summary")}
 

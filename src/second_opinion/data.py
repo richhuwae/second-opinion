@@ -37,8 +37,6 @@ SHA256 = {
     "eval": "e99dd3c6372c10d6fcc5e385c5fae69d0dd40392dae56836ef9493ae324ecd2f",
 }
 
-DATA_DIR = Path(__file__).resolve().parents[2] / "data" / "raw"
-
 META_EVAL_REQUIRED = {
     "prompt",
     "completion",
@@ -57,8 +55,11 @@ def sha256sum(path: Path) -> str:
     return h.hexdigest()
 
 
-def download(name: str, dest_dir: Path = DATA_DIR, overwrite: bool = False) -> Path:
+def download(name: str, dest_dir: Path, overwrite: bool = False) -> Path:
     """Download one HealthBench file to ``dest_dir``, verify it, and return its path.
+
+    ``dest_dir`` is required: the package must not guess paths from where it is
+    installed (in a normal pip install that is site-packages, not the repo).
 
     Tries each mirror in ``MIRRORS`` in turn. Raises ``OSError`` if none works.
     """

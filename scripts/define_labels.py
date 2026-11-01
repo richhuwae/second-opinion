@@ -10,13 +10,14 @@ from pathlib import Path
 from second_opinion.data import download, load_meta_eval, read_jsonl
 from second_opinion.labels import answer_labels, high_stakes_conversations, summarize_labels
 
+RAW = Path(__file__).resolve().parents[1] / "data" / "raw"
 OUT = Path(__file__).resolve().parents[1] / "results" / "label_summary.json"
 
 
 def main() -> int:
     try:
-        df = load_meta_eval(download("meta_eval"))
-        eval_rows = read_jsonl(download("eval"))
+        df = load_meta_eval(download("meta_eval", RAW))
+        eval_rows = read_jsonl(download("eval", RAW))
     except OSError as exc:
         print(f"Could not get the data files ({exc}).", file=sys.stderr)
         return 1
