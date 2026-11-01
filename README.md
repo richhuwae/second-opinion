@@ -83,7 +83,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest
 python scripts/download_data.py   # checks SHA-256 against OpenAI's published hashes
-python scripts/train_grader.py     # ~15-20 min on 4 CPUs; --quick for a ~3 min check
+python scripts/train_grader.py     # full protocol; add --quick for a shorter check
 ```
 
 `download_data.py` tries OpenAI's blob storage first, then OpenAI's own
