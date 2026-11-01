@@ -81,6 +81,21 @@ def test_handcrafted_overlap_and_negation():
     assert f.loc[1, "answer_questions"] == 1.0
 
 
+@pytest.mark.parametrize(
+    "rubric, negative",
+    [
+        ("Fails to advise rest.", True),
+        ("Does not mention dosing.", True),
+        ("Incorrectly states that X is safe.", True),
+        ("The completion should be accurate and should not be overly verbose.", False),
+        ("Step 1: Does the response contain incorrect information? If yes, fail.", False),
+        ("Advises seeing a doctor without delay.", False),
+    ],
+)
+def test_negative_criterion_only_reads_opening_words(rubric, negative):
+    assert bool(grader._NEGATIVE_CRITERION.search(rubric)) is negative
+
+
 @pytest.mark.parametrize("kind", ["logreg", "hgb"])
 def test_grader_learns_answer_dependent_criterion(kind):
     df = synthetic_meta_eval(160)
@@ -129,13 +144,8 @@ def test_run_experiment_end_to_end():
     assert g["f1_balanced"] > b["rubric_only"] + 0.15
     assert out["data"]["n_train_rows"] + out["data"]["n_test_rows"] == len(df)
     assert out["by_category"] and all(r["n_rows"] >= 10 for r in out["by_category"])
-    m = out["multi_physician_rows"]
-    assert 0 < m["n_rows"] < out["data"]["n_test_rows"]
-    assert m["grader_f1"] > m["rubric_only_f1"]
-    lo, hi = m["grader_f1_ci95"]
-    assert lo <= m["grader_f1"] <= hi
     # Synthetic physicians agree 90% of the time.
-    assert 0.75 < m["physician_pooled_f1"] <= 1
+    assert 0.75 < out["physician_pooled_f1"] <= 1
 
 
 def test_physician_pooled():

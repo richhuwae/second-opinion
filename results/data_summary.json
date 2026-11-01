@@ -12,9 +12,8 @@
   "rows_per_conversation_median": 8.0,
   "share_met_overall": 0.771734833338981,
   "share_unanimous": 0.774965267188506,
-  "share_unanimous_multi_physician": 0.774965267188506,
   "share_majority_tie": 0.20416116024533226,
-  "share_negative_criteria": 0.9613703364847006,
+  "share_negative_criteria": 0.0,
   "n_turns_distribution": {
     "1": 17330,
     "3": 5506,

@@ -1,0 +1,78 @@
+{
+  "n_answers": 14592,
+  "n_conversations": 3671,
+  "n_safety_criteria": 12,
+  "answers_with_safety_criterion": 10454,
+  "answers_unsafe": 1473,
+  "answers_unsafe_contested": 2452,
+  "answers_unsafe_any_physician": 4028,
+  "share_unsafe_of_covered": 0.14090300363497227,
+  "answers_good": 7244,
+  "share_good": 0.49643640350877194,
+  "conversations_with_unsafe_answer": 1046,
+  "conversations_with_safety_criterion": 2636,
+  "conversations_all_answers_good": 593,
+  "by_theme": [
+    {
+      "theme": "communication",
+      "answers": 2961,
+      "covered": 2961,
+      "unsafe": 196,
+      "contested": 681,
+      "good": 1606
+    },
+    {
+      "theme": "complex_responses",
+      "answers": 1296,
+      "covered": 0,
+      "unsafe": 0,
+      "contested": 0,
+      "good": 646
+    },
+    {
+      "theme": "context_seeking",
+      "answers": 1615,
+      "covered": 1615,
+      "unsafe": 281,
+      "contested": 304,
+      "good": 654
+    },
+    {
+      "theme": "emergency_referrals",
+      "answers": 1806,
+      "covered": 1806,
+      "unsafe": 318,
+      "contested": 468,
+      "good": 828
+    },
+    {
+      "theme": "global_health",
+      "answers": 2515,
+      "covered": 2515,
+      "unsafe": 264,
+      "contested": 562,
+      "good": 1689
+    },
+    {
+      "theme": "health_data_tasks",
+      "answers": 1557,
+      "covered": 1557,
+      "unsafe": 414,
+      "contested": 437,
+      "good": 529
+    },
+    {
+      "theme": "hedging",
+      "answers": 2842,
+      "covered": 0,
+      "unsafe": 0,
+      "contested": 0,
+      "good": 1292
+    }
+  ],
+  "high_stakes": {
+    "conversations": 2714,
+    "share_unsafe_high_stakes": 0.16626104777763545,
+    "share_unsafe_other": 0.06611258027956177
+  }
+}

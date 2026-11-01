@@ -55,15 +55,6 @@ def main() -> int:
     print(f"  physicians (mean of {c['n_physicians']}): {fmt(c['mean'])}")
     print(f"  physicians (pooled pairs): {fmt(out['physician_pooled_f1'])}")
     print(f"  calibration error:    {fmt(g['ece_vs_physicians'])}")
-    m = out["multi_physician_rows"]
-    if m.get("grader_f1") is not None:
-        lo, hi = m["grader_f1_ci95"]
-        print(f"\nOnly the {m['n_rows']:,} held-out rows graded by 2+ physicians")
-        print(f"  grader:               {fmt(m['grader_f1'])}  (95% CI {lo:.3f}-{hi:.3f})")
-        print(f"  rubric-only baseline: {fmt(m['rubric_only_f1'])}")
-        print(f"  physicians (pooled pairs): {fmt(m['physician_pooled_f1'])}")
-        print(f"  physicians (mean of {m['physician_ceiling']['n_physicians']}): "
-              f"{fmt(m['physician_ceiling']['mean'])}")
     print(f"\nWrote {RESULTS}")
     return 0
 

@@ -38,7 +38,6 @@ def summarize(df: pd.DataFrame) -> dict:
         "rows_per_conversation_median": float(per_convo.size().median()),
         "share_met_overall": float(df["share_met"].mean()),
         "share_unanimous": float(df["unanimous"].mean()),
-        "share_unanimous_multi_physician": float(df.loc[df["n_physicians"] > 1, "unanimous"].mean()),
         "share_majority_tie": float(df["majority_met"].isna().mean()),
         "share_negative_criteria": float(
             df["rubric"].map(lambda r: bool(_NEGATIVE_CRITERION.search(r))).mean()

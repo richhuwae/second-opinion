@@ -51,10 +51,14 @@ _STOPWORDS = frozenset(
     suggests asks correctly clearly appropriate appropriately""".split()
 )
 # Criteria phrased as something the answer must NOT do ("Fails to...") flip
-# the meaning of word overlap, so the model needs to know about them.
+# the meaning of word overlap, so the model needs to know about them. Only the
+# opening words count: a criterion that asks for good behaviour often adds
+# "should not be overly verbose" later, which does not make it negative.
+# All meta-eval criteria are positive (+5 points in the eval file), so this is
+# zero on HealthBench meta-eval; it matters for example-level rubrics.
 _NEGATIVE_CRITERION = re.compile(
-    r"\b(fails?|does not|doesn't|do not|don't|not|avoid|without|incorrect|"
-    r"inaccurate|misleading|recommends against|unnecessar)",
+    r"^\W*(fails?\b|does not\b|doesn't\b|do not\b|don't\b|avoid|"
+    r"incorrectly\b|recommends against\b|advises against\b)",
     re.I,
 )
 _HEDGE = re.compile(r"\b(may|might|could|possibly|consult|not sure|depends)\b", re.I)
