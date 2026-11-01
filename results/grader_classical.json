@@ -12,7 +12,7 @@
     "candidates": {
       "logreg": {
         "threshold": 0.69,
-        "oof_f1": 0.6598728323270862
+        "oof_f1": 0.660132461178412
       },
       "hgb": {
         "threshold": 0.69,
@@ -40,7 +40,7 @@
       0.7018104785474168
     ],
     "ece_vs_physicians": 0.010206344506780493,
-    "seconds_per_1000_rows": 1.2879545927056788
+    "seconds_per_1000_rows": 1.1211591121289288
   },
   "baselines": {
     "always_met": null,
@@ -59,27 +59,6 @@
     "max": 0.9499105545617174
   },
   "physician_pooled_f1": 0.7033569014024652,
-  "multi_physician_rows": {
-    "n_rows": 5895,
-    "grader_f1": 0.6872256170808719,
-    "grader_f1_ci95": [
-      0.6733023116493805,
-      0.7018104785474168
-    ],
-    "rubric_only_f1": 0.6380847447729725,
-    "rubric_only_f1_ci95": [
-      0.6244448246975548,
-      0.6536927090773224
-    ],
-    "physician_pooled_f1": 0.7033569014024652,
-    "physician_ceiling": {
-      "n_physicians": 144,
-      "mean": 0.6820219990131285,
-      "median": 0.6874983707615778,
-      "min": 0.3769230769230769,
-      "max": 0.9499105545617174
-    }
-  },
   "by_category": [
     {
       "category": "cluster:communication_health-professional_accuracy_completeness",
