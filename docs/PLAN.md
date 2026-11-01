@@ -95,6 +95,9 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Hosting: Streamlit Community Cloud, deployed from main after the PR is merged |
 | 2026-11-01 | C5 cost figures use assumed 4 min per review and EUR 90 per physician hour, labelled as assumptions |
 | 2026-11-01 | Negative-criterion flag reads only a criterion's opening words ("Fails to...", "Does not..."). Meta-eval criteria are all positive (+5-point cluster criteria in the eval file), so the flag is 0 there; rerunning the grader changed nothing for the chosen model |
+| 2026-11-01 | C7: every number in the README, write-up and model card sits between `<!--n:key-->` markers (tables between `<!--table:key-->` markers) that `scripts/update_docs.py` fills from `results/*.json` via `src/second_opinion/report.py`. `tests/test_report.py` fails if a doc disagrees with the results or holds an unmarked result-like number |
+| 2026-11-01 | Headline chart drawn by `scripts/make_figures.py` from `results/safety_alarm.json` only (no rerun): the 7 tested capacities plus the 50%/80% recall points, lines joining them; plotted points saved as CSV and checked by a test. matplotlib is a `docs` extra, not a runtime dependency |
+| 2026-11-01 | Headline result: share of answers to read to catch half the unsafe ones, and share caught at 10% capacity, for grader, criterion-only, random and perfect ranking (main result, out-of-fold) |
 
 ## Data facts (from OpenAI's reference loader)
 
@@ -112,22 +115,22 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
 - [x] C2 classical grader run on HealthBench: `results/grader_classical.json` (full run; gradient
       boosting chosen by cross-validation over logistic regression). Beats the rubric-only baseline;
       overall level with the per-physician mean but below the pooled physician score, and below
-      physicians in most themes. Rerun after the regex fix gave the same result. Not yet reviewed
-      by the owner; no numbers in the README yet
+      physicians in most themes. Rerun after the regex fix gave the same result
 - [x] C3 trust check: balanced F1, physician ceiling, calibration, conversation-level CIs and
       Cohen's kappa, all in `results/grader_classical.json`. Kappa: grader below physician-vs-
       colleague, above the rubric-only baseline
 - [x] C4 safety alarm and C5 cost view: `results/safety_alarm.json` (`scripts/safety_alarm.py`,
       model fixed in advance).
       Grader ranking beats criterion-only ranking and random sampling at every capacity tested,
-      in the main result and the sensitivity check; well below perfect ranking. Not yet reviewed
-      by the owner; no numbers in the README yet
-- [~] C6 demo built: `app/streamlit_app.py`, assets from `scripts/build_demo_assets.py`, smoke tests
+      in the main result and the sensitivity check; well below perfect ranking
+- [x] C6 demo built: `app/streamlit_app.py`, assets from `scripts/build_demo_assets.py`, smoke tests
       in `tests/test_demo.py`, screenshots in `docs/screenshots/`. Verified with a Cloud-style install (fresh venv,
-      `pip install -r requirements.txt`, no -e): all four pages load. Not deployed yet (after merge)
-- [ ] C7 write-up
+      `pip install -r requirements.txt`, no -e): all four pages load. Live at https://second-opinion-666.streamlit.app
+- [x] C7 write-up (pending owner review): README rewritten with headline chart
+      (`docs/figures/caught_vs_capacity.png`), `docs/WRITEUP.md`, `docs/MODEL_CARD.md`; all numbers
+      filled from results by `scripts/update_docs.py` and checked by `tests/test_report.py`
+- Next: optional stages, starting with routing (see Scope)
 
 ## Open questions
 
 - Is there a target date for showing the project?
-- Hosting choice for the demo
