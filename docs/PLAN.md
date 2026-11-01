@@ -85,6 +85,9 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Compare with physicians on rows graded by 2+ physicians too (the only rows the ceiling uses), and report a pooled-pairs physician score next to the per-physician mean |
 | 2026-11-01 | Train on soft labels (share of physicians who said "met"); split, CV and bootstrap all grouped by conversation |
 | 2026-11-01 | Dropped the separate "2+ physicians" results section: every meta-eval row has 2+ physicians, so it repeated the main scores exactly. The pooled-pairs physician score stays |
+| 2026-11-01 | Labels (owner): unit is one bot answer; "unsafe" = majority "not met" on any of 12 safety criteria; ties form a third group, "contested"; list and reasons in `docs/labels.md`. Hedging and complex-response answers cannot be flagged (stated limitation) |
+| 2026-11-01 | C4 risk score = max over an answer's safety criteria of held-out P(not met); held-out means grouped out-of-fold over all answers (main) and the C2 test split (check). Main result: contested counts as not unsafe; sensitivity: contested counts as unsafe |
+| 2026-11-01 | C5 cost figures use assumed 4 min per review and EUR 90 per physician hour, labelled as assumptions |
 | 2026-11-01 | Negative-criterion flag reads only a criterion's opening words ("Fails to...", "Does not..."). Meta-eval criteria are all positive (+5-point cluster criteria in the eval file), so the flag is 0 there; rerunning the grader changed nothing for the chosen model |
 
 ## Data facts (from OpenAI's reference loader)
@@ -98,23 +101,23 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
 
 - [x] Repo skeleton, loader, trust metrics, review-budget simulation, 213 passing tests
 - [x] Download data (2026-11-01, after the network policy was opened; checksums verified)
-- [~] C1 exploration: `results/data_summary.json` written. Every row has 2+ physicians.
-      Proposed "unsafe" / "good" answer labels in `src/second_opinion/labels.py`, counts in
-      `results/label_summary.json` (`scripts/define_labels.py`). **Awaiting owner review; nothing
-      builds on them yet**
+- [x] C1 exploration and labels: `results/data_summary.json`, `results/label_summary.json`,
+      definitions and the 12 safety criteria in `docs/labels.md`
 - [x] C2 classical grader run on HealthBench: `results/grader_classical.json` (full run; gradient
       boosting chosen by cross-validation over logistic regression). Beats the rubric-only baseline;
       overall level with the per-physician mean but below the pooled physician score, and below
       physicians in most themes. Rerun after the regex fix gave the same result. Not yet reviewed
       by the owner; no numbers in the README yet
-- [ ] C3–C5 results
+- [~] C3 trust check: balanced F1, physician ceiling, calibration, CIs done in C2; Cohen's kappa
+      not yet reported
+- [x] C4 safety alarm and C5 cost view: `results/safety_alarm.json` (`scripts/safety_alarm.py`).
+      Grader ranking beats criterion-only ranking and random sampling at every capacity tested,
+      in the main result and the sensitivity check; well below perfect ranking. Not yet reviewed
+      by the owner; no numbers in the README yet
 - [ ] C6 demo
 - [ ] C7 write-up
 
 ## Open questions
 
 - Is there a target date for showing the project?
-- Proposed labels (unit = one bot answer): accept the 12 safety criteria? How to treat ties
-  ("contested"): own class, count as unsafe, or drop? Hedging and complex-response answers have
-  no safety criterion, so they can never be "unsafe" under this definition
 - Hosting choice for the demo

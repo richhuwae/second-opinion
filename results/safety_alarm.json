@@ -1,0 +1,1622 @@
+{
+  "model": "hgb",
+  "n_folds": 5,
+  "seed": 0,
+  "risk_score": "max over the answer's safety criteria of held-out P(not met)",
+  "out_of_fold_all_answers": {
+    "n_answers": 10454,
+    "n_conversations": 2636,
+    "main_contested_is_not_unsafe": {
+      "n_positive": 1473,
+      "ranking_quality": {
+        "grader": {
+          "roc_auc": 0.799586257871241,
+          "average_precision": 0.46723106027819866
+        },
+        "criterion_only": {
+          "roc_auc": 0.6692311059033657,
+          "average_precision": 0.23843606023596148
+        },
+        "base_rate": 0.14090300363497227
+      },
+      "capacity": [
+        {
+          "capacity_share": 0.01,
+          "n_reviewed": 105,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 85.0,
+            "missed": 1388.0,
+            "false_alarms": 20.0,
+            "recall": 0.05770536320434488,
+            "precision": 0.8095238095238095,
+            "recall_ci95": [
+              0.05170050084633756,
+              0.06517243326633657
+            ]
+          },
+          "criterion_only": {
+            "caught": 32.1,
+            "missed": 1440.9,
+            "false_alarms": 72.9,
+            "recall": 0.02176908911301633,
+            "precision": 0.30538922155688625,
+            "recall_ci95": [
+              0.01708481172899257,
+              0.025959290447828246
+            ]
+          },
+          "random": {
+            "caught": 14.8,
+            "missed": 1458.2,
+            "false_alarms": 90.2,
+            "recall": 0.010044002295771954,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 105.0,
+            "missed": 1368.0,
+            "false_alarms": 0.0,
+            "recall": 0.07128309572301425,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.028977708517538513,
+            0.04479918995191803
+          ]
+        },
+        {
+          "capacity_share": 0.02,
+          "n_reviewed": 209,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 155.0,
+            "missed": 1318.0,
+            "false_alarms": 54.0,
+            "recall": 0.10522742701968771,
+            "precision": 0.7416267942583732,
+            "recall_ci95": [
+              0.0961637843032457,
+              0.11656005685856433
+            ]
+          },
+          "criterion_only": {
+            "caught": 65.0,
+            "missed": 1408.0,
+            "false_alarms": 144.0,
+            "recall": 0.04412763068567549,
+            "precision": 0.31100478468899523,
+            "recall_ci95": [
+              0.037043851654335484,
+              0.05138117667834323
+            ]
+          },
+          "random": {
+            "caught": 29.4,
+            "missed": 1443.6,
+            "false_alarms": 179.6,
+            "recall": 0.01999234742682227,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 209.0,
+            "missed": 1264.0,
+            "false_alarms": 0.0,
+            "recall": 0.14188730482009504,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.050487932307067836,
+            0.0738004726071591
+          ]
+        },
+        {
+          "capacity_share": 0.05,
+          "n_reviewed": 523,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 341.0,
+            "missed": 1132.0,
+            "false_alarms": 182.0,
+            "recall": 0.23150033944331297,
+            "precision": 0.6520076481835564,
+            "recall_ci95": [
+              0.2179315868974919,
+              0.25
+            ]
+          },
+          "criterion_only": {
+            "caught": 174.1,
+            "missed": 1298.9,
+            "false_alarms": 348.9,
+            "recall": 0.11821560010004645,
+            "precision": 0.33294756968904093,
+            "recall_ci95": [
+              0.10432533343010876,
+              0.1317801450953913
+            ]
+          },
+          "random": {
+            "caught": 73.7,
+            "missed": 1399.3,
+            "false_alarms": 449.3,
+            "recall": 0.0500286971494165,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 523.0,
+            "missed": 950.0,
+            "false_alarms": 0.0,
+            "recall": 0.35505770536320436,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.09710407124055515,
+            0.13371676133898597
+          ]
+        },
+        {
+          "capacity_share": 0.1,
+          "n_reviewed": 1045,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 558.0,
+            "missed": 915.0,
+            "false_alarms": 487.0,
+            "recall": 0.3788187372708758,
+            "precision": 0.5339712918660288,
+            "recall_ci95": [
+              0.3546002526280395,
+              0.39942460351142256
+            ]
+          },
+          "criterion_only": {
+            "caught": 308.3,
+            "missed": 1164.7,
+            "false_alarms": 736.7,
+            "recall": 0.20928033852702427,
+            "precision": 0.29499515660316433,
+            "recall_ci95": [
+              0.19072011161746064,
+              0.22719816871801957
+            ]
+          },
+          "random": {
+            "caught": 147.2,
+            "missed": 1325.8,
+            "false_alarms": 897.8,
+            "recall": 0.09996173713411134,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 1045.0,
+            "missed": 428.0,
+            "false_alarms": 0.0,
+            "recall": 0.7094365241004752,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.14638166174157735,
+            0.18925451126688536
+          ]
+        },
+        {
+          "capacity_share": 0.2,
+          "n_reviewed": 2091,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 820.0,
+            "missed": 653.0,
+            "false_alarms": 1271.0,
+            "recall": 0.5566870332654447,
+            "precision": 0.39215686274509803,
+            "recall_ci95": [
+              0.5289020611786591,
+              0.5796234850573881
+            ]
+          },
+          "criterion_only": {
+            "caught": 526.8,
+            "missed": 946.2,
+            "false_alarms": 1564.2,
+            "recall": 0.35762133318141465,
+            "precision": 0.25192550156682153,
+            "recall_ci95": [
+              0.33256466905491977,
+              0.381064948501141
+            ]
+          },
+          "random": {
+            "caught": 294.6,
+            "missed": 1178.4,
+            "false_alarms": 1796.4,
+            "recall": 0.20001913143294436,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 1473.0,
+            "missed": 0.0,
+            "false_alarms": 618.0,
+            "recall": 1.0,
+            "precision": 0.7044476327116213
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.16895107697148404,
+            0.22371091553459038
+          ]
+        },
+        {
+          "capacity_share": 0.3,
+          "n_reviewed": 3136,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 1005.0,
+            "missed": 468.0,
+            "false_alarms": 2131.0,
+            "recall": 0.6822810590631364,
+            "precision": 0.3204719387755102,
+            "recall_ci95": [
+              0.6584717607973422,
+              0.70760826899958
+            ]
+          },
+          "criterion_only": {
+            "caught": 732.8,
+            "missed": 740.2,
+            "false_alarms": 2403.2,
+            "recall": 0.49750230517473726,
+            "precision": 0.23368013250076147,
+            "recall_ci95": [
+              0.4704292505403657,
+              0.5245881109154523
+            ]
+          },
+          "random": {
+            "caught": 441.9,
+            "missed": 1031.1,
+            "false_alarms": 2694.1,
+            "recall": 0.2999808685670557,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 1473.0,
+            "missed": 0.0,
+            "false_alarms": 1663.0,
+            "recall": 1.0,
+            "precision": 0.46970663265306123
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.1578045995279644,
+            0.21292071004723473
+          ]
+        },
+        {
+          "capacity_share": 0.5,
+          "n_reviewed": 5227,
+          "n_unsafe": 1473,
+          "grader": {
+            "caught": 1243.0,
+            "missed": 230.0,
+            "false_alarms": 3984.0,
+            "recall": 0.8438560760353021,
+            "precision": 0.2378037114979912,
+            "recall_ci95": [
+              0.8236864218758666,
+              0.8638237110219203
+            ]
+          },
+          "criterion_only": {
+            "caught": 1102.7,
+            "missed": 370.3,
+            "false_alarms": 4124.3,
+            "recall": 0.7486179807972069,
+            "precision": 0.21096504413894887,
+            "recall_ci95": [
+              0.722418429210427,
+              0.7710688002206119
+            ]
+          },
+          "random": {
+            "caught": 736.5,
+            "missed": 736.5,
+            "false_alarms": 4490.5,
+            "recall": 0.5,
+            "precision": 0.14090300363497227
+          },
+          "perfect": {
+            "caught": 1473.0,
+            "missed": 0.0,
+            "false_alarms": 3754.0,
+            "recall": 1.0,
+            "precision": 0.28180600726994454
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.07406789950359495,
+            0.1187561310269441
+          ]
+        }
+      ],
+      "share_to_review_for_recall": {
+        "0.5": {
+          "grader": 0.15898220776736177,
+          "criterion_only": 0.30170269753204515,
+          "random": 0.5,
+          "perfect": 0.07049933039984695
+        },
+        "0.8": {
+          "grader": 0.430839869906256,
+          "criterion_only": 0.5844652764492061,
+          "random": 0.8000765257317773,
+          "perfect": 0.11277979720681079
+        }
+      }
+    },
+    "sensitivity_contested_is_unsafe": {
+      "n_positive": 3925,
+      "ranking_quality": {
+        "grader": {
+          "roc_auc": 0.7238572639658631,
+          "average_precision": 0.648476073370595
+        },
+        "criterion_only": {
+          "roc_auc": 0.6394953041452491,
+          "average_precision": 0.4934857925981713
+        },
+        "base_rate": 0.3754543715324278
+      },
+      "capacity": [
+        {
+          "capacity_share": 0.01,
+          "n_reviewed": 105,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 102.0,
+            "missed": 3823.0,
+            "false_alarms": 3.0,
+            "recall": 0.025987261146496816,
+            "precision": 0.9714285714285714,
+            "recall_ci95": [
+              0.02482871569224793,
+              0.027141271384196468
+            ]
+          },
+          "criterion_only": {
+            "caught": 57.2,
+            "missed": 3867.8,
+            "false_alarms": 47.8,
+            "recall": 0.014577214996758075,
+            "precision": 0.5449101796407185,
+            "recall_ci95": [
+              0.012658650778810595,
+              0.016559656283434875
+            ]
+          },
+          "random": {
+            "caught": 39.4,
+            "missed": 3885.6,
+            "false_alarms": 65.6,
+            "recall": 0.010044002295771954,
+            "precision": 0.3754543715324278
+          },
+          "perfect": {
+            "caught": 105.0,
+            "missed": 3820.0,
+            "false_alarms": 0.0,
+            "recall": 0.0267515923566879,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.009555840656692755,
+            0.013486781195762493
+          ]
+        },
+        {
+          "capacity_share": 0.02,
+          "n_reviewed": 209,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 196.0,
+            "missed": 3729.0,
+            "false_alarms": 13.0,
+            "recall": 0.049936305732484074,
+            "precision": 0.937799043062201,
+            "recall_ci95": [
+              0.048097692019632377,
+              0.052535772507114456
+            ]
+          },
+          "criterion_only": {
+            "caught": 113.0,
+            "missed": 3812.0,
+            "false_alarms": 96.0,
+            "recall": 0.028779817659547898,
+            "precision": 0.5404822215967727,
+            "recall_ci95": [
+              0.025749551977958467,
+              0.03212589127596251
+            ]
+          },
+          "random": {
+            "caught": 78.5,
+            "missed": 3846.5,
+            "false_alarms": 130.5,
+            "recall": 0.01999234742682227,
+            "precision": 0.3754543715324278
+          },
+          "perfect": {
+            "caught": 209.0,
+            "missed": 3716.0,
+            "false_alarms": 0.0,
+            "recall": 0.0532484076433121,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.01786059926669802,
+            0.025017155999411154
+          ]
+        },
+        {
+          "capacity_share": 0.05,
+          "n_reviewed": 523,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 466.0,
+            "missed": 3459.0,
+            "false_alarms": 57.0,
+            "recall": 0.11872611464968152,
+            "precision": 0.8910133843212237,
+            "recall_ci95": [
+              0.11454047808593076,
+              0.1242147413124299
+            ]
+          },
+          "criterion_only": {
+            "caught": 297.4,
+            "missed": 3627.6,
+            "false_alarms": 225.6,
+            "recall": 0.07577159459157447,
+            "precision": 0.5686491563516822,
+            "recall_ci95": [
+              0.06999695521520424,
+              0.08155200343521433
+            ]
+          },
+          "random": {
+            "caught": 196.4,
+            "missed": 3728.6,
+            "false_alarms": 326.6,
+            "recall": 0.0500286971494165,
+            "precision": 0.3754543715324278
+          },
+          "perfect": {
+            "caught": 523.0,
+            "missed": 3402.0,
+            "false_alarms": 0.0,
+            "recall": 0.1332484076433121,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.0369051786169008,
+            0.049670304641678736
+          ]
+        },
+        {
+          "capacity_share": 0.1,
+          "n_reviewed": 1045,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 852.0,
+            "missed": 3073.0,
+            "false_alarms": 193.0,
+            "recall": 0.2170700636942675,
+            "precision": 0.815311004784689,
+            "recall_ci95": [
+              0.20944715038396505,
+              0.22518904117806485
+            ]
+          },
+          "criterion_only": {
+            "caught": 589.9,
+            "missed": 3335.1,
+            "false_alarms": 455.1,
+            "recall": 0.15028721034738776,
+            "precision": 0.5644758857545426,
+            "recall_ci95": [
+              0.14171013884565195,
+              0.1581432854350412
+            ]
+          },
+          "random": {
+            "caught": 392.3,
+            "missed": 3532.7,
+            "false_alarms": 652.7,
+            "recall": 0.09996173713411134,
+            "precision": 0.3754543715324278
+          },
+          "perfect": {
+            "caught": 1045.0,
+            "missed": 2880.0,
+            "false_alarms": 0.0,
+            "recall": 0.2662420382165605,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.057982005579379874,
+            0.07615565968873801
+          ]
+        },
+        {
+          "capacity_share": 0.2,
+          "n_reviewed": 2091,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 1474.0,
+            "missed": 2451.0,
+            "false_alarms": 617.0,
+            "recall": 0.37554140127388536,
+            "precision": 0.7049258727881397,
+            "recall_ci95": [
+              0.363797779746239,
+              0.38629156154098593
+            ]
+          },
+          "criterion_only": {
+            "caught": 1139.7,
+            "missed": 2785.3,
+            "false_alarms": 951.3,
+            "recall": 0.2903728119014743,
+            "precision": 0.5450565694468132,
+            "recall_ci95": [
+              0.2781282202970572,
+              0.30193260589681764
+            ]
+          },
+          "random": {
+            "caught": 785.1,
+            "missed": 3139.9,
+            "false_alarms": 1305.9,
+            "recall": 0.20001913143294434,
+            "precision": 0.3754543715324278
+          },
+          "perfect": {
+            "caught": 2091.0,
+            "missed": 1834.0,
+            "false_alarms": 0.0,
+            "recall": 0.5327388535031847,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.07203560754550058,
+            0.0974139462381044
+          ]
+        },
+        {
+          "capacity_share": 0.3,
+          "n_reviewed": 3136,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 1951.0,
+            "missed": 1974.0,
+            "false_alarms": 1185.0,
+            "recall": 0.49707006369426754,
+            "precision": 0.6221301020408163,
+            "recall_ci95": [
+              0.48401245099079104,
+              0.5106453606111637
+            ]
+          },
+          "criterion_only": {
+            "caught": 1620.9,
+            "missed": 2304.1,
+            "false_alarms": 1515.1,
+            "recall": 0.4129784200019013,
+            "precision": 0.5168814727383491,
+            "recall_ci95": [
+              0.3999531978634476,
+              0.4281481097571336
+            ]
+          },
+          "random": {
+            "caught": 1177.4,
+            "missed": 2747.6,
+            "false_alarms": 1958.6,
+            "recall": 0.2999808685670557,
+            "precision": 0.37545437153242783
+          },
+          "perfect": {
+            "caught": 3136.0,
+            "missed": 789.0,
+            "false_alarms": 0.0,
+            "recall": 0.7989808917197452,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.06857401398881426,
+            0.09749990107303592
+          ]
+        },
+        {
+          "capacity_share": 0.5,
+          "n_reviewed": 5227,
+          "n_unsafe": 3925,
+          "grader": {
+            "caught": 2714.0,
+            "missed": 1211.0,
+            "false_alarms": 2513.0,
+            "recall": 0.6914649681528663,
+            "precision": 0.5192270901090492,
+            "recall_ci95": [
+              0.6788743113692033,
+              0.7070233932487411
+            ]
+          },
+          "criterion_only": {
+            "caught": 2492.9,
+            "missed": 1432.1,
+            "false_alarms": 2734.1,
+            "recall": 0.6351410373066424,
+            "precision": 0.4769329579928394,
+            "recall_ci95": [
+              0.6197158077168211,
+              0.6493423963087229
+            ]
+          },
+          "random": {
+            "caught": 1962.5,
+            "missed": 1962.5,
+            "false_alarms": 3264.5,
+            "recall": 0.5,
+            "precision": 0.3754543715324278
+          },
+          "perfect": {
+            "caught": 3925.0,
+            "missed": 0.0,
+            "false_alarms": 1302.0,
+            "recall": 1.0,
+            "precision": 0.7509087430648556
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.04241237742793538,
+            0.0715983982508034
+          ]
+        }
+      ],
+      "share_to_review_for_recall": {
+        "0.5": {
+          "grader": 0.30218098335565335,
+          "criterion_only": 0.3656016835660991,
+          "random": 0.5,
+          "perfect": 0.18777501434857471
+        },
+        "0.8": {
+          "grader": 0.6317199158216951,
+          "criterion_only": 0.7020279318920987,
+          "random": 0.8000765257317773,
+          "perfect": 0.30036349722594224
+        }
+      }
+    }
+  },
+  "check_c2_test_split": {
+    "n_answers": 2081,
+    "n_conversations": 525,
+    "main_contested_is_not_unsafe": {
+      "n_positive": 301,
+      "ranking_quality": {
+        "grader": {
+          "roc_auc": 0.8147308596812124,
+          "average_precision": 0.4878728098512418
+        },
+        "criterion_only": {
+          "roc_auc": 0.6709768935010638,
+          "average_precision": 0.23826126871705441
+        },
+        "base_rate": 0.1446419990389236
+      },
+      "capacity": [
+        {
+          "capacity_share": 0.01,
+          "n_reviewed": 21,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 18.0,
+            "missed": 283.0,
+            "false_alarms": 3.0,
+            "recall": 0.059800664451827246,
+            "precision": 0.8571428571428571,
+            "recall_ci95": [
+              0.04501007822623219,
+              0.07142857142857142
+            ]
+          },
+          "criterion_only": {
+            "caught": 7.7,
+            "missed": 293.3,
+            "false_alarms": 13.3,
+            "recall": 0.025703794369645042,
+            "precision": 0.3684210526315789,
+            "recall_ci95": [
+              0.019519187819040332,
+              0.03303832245930722
+            ]
+          },
+          "random": {
+            "caught": 3.0,
+            "missed": 298.0,
+            "false_alarms": 18.0,
+            "recall": 0.010091302258529554,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 21.0,
+            "missed": 280.0,
+            "false_alarms": 0.0,
+            "recall": 0.06976744186046512,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.017702818533396517,
+            0.04623097735567592
+          ]
+        },
+        {
+          "capacity_share": 0.02,
+          "n_reviewed": 42,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 29.0,
+            "missed": 272.0,
+            "false_alarms": 13.0,
+            "recall": 0.09634551495016612,
+            "precision": 0.6904761904761905,
+            "recall_ci95": [
+              0.0776691491286257,
+              0.1217881617591686
+            ]
+          },
+          "criterion_only": {
+            "caught": 15.5,
+            "missed": 285.5,
+            "false_alarms": 26.5,
+            "recall": 0.051407588739290085,
+            "precision": 0.3684210526315789,
+            "recall_ci95": [
+              0.03861341379704719,
+              0.06580698187205483
+            ]
+          },
+          "random": {
+            "caught": 6.1,
+            "missed": 294.9,
+            "false_alarms": 35.9,
+            "recall": 0.020182604517059107,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 42.0,
+            "missed": 259.0,
+            "false_alarms": 0.0,
+            "recall": 0.13953488372093023,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.02289985157950464,
+            0.07277925123001229
+          ]
+        },
+        {
+          "capacity_share": 0.05,
+          "n_reviewed": 104,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 69.0,
+            "missed": 232.0,
+            "false_alarms": 35.0,
+            "recall": 0.2292358803986711,
+            "precision": 0.6634615384615384,
+            "recall_ci95": [
+              0.19029760912160754,
+              0.26689252692542165
+            ]
+          },
+          "criterion_only": {
+            "caught": 38.3,
+            "missed": 262.7,
+            "false_alarms": 65.7,
+            "recall": 0.12729498164014685,
+            "precision": 0.36842105263157887,
+            "recall_ci95": [
+              0.09211919252528716,
+              0.15931126162728554
+            ]
+          },
+          "random": {
+            "caught": 15.0,
+            "missed": 286.0,
+            "false_alarms": 89.0,
+            "recall": 0.04997597308986065,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 104.0,
+            "missed": 197.0,
+            "false_alarms": 0.0,
+            "recall": 0.34551495016611294,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.06465603609071364,
+            0.14690135233602525
+          ]
+        },
+        {
+          "capacity_share": 0.1,
+          "n_reviewed": 208,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 118.0,
+            "missed": 183.0,
+            "false_alarms": 90.0,
+            "recall": 0.3920265780730897,
+            "precision": 0.5673076923076923,
+            "recall_ci95": [
+              0.34847879756026723,
+              0.44286818851251836
+            ]
+          },
+          "criterion_only": {
+            "caught": 57.5,
+            "missed": 243.5,
+            "false_alarms": 150.5,
+            "recall": 0.19094886962158658,
+            "precision": 0.2763250469043152,
+            "recall_ci95": [
+              0.14792594043887147,
+              0.23508238420677674
+            ]
+          },
+          "random": {
+            "caught": 30.1,
+            "missed": 270.9,
+            "false_alarms": 177.9,
+            "recall": 0.0999519461797213,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 208.0,
+            "missed": 93.0,
+            "false_alarms": 0.0,
+            "recall": 0.6910299003322259,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.1556706490425352,
+            0.25720853496690244
+          ]
+        },
+        {
+          "capacity_share": 0.2,
+          "n_reviewed": 416,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 178.0,
+            "missed": 123.0,
+            "false_alarms": 238.0,
+            "recall": 0.5913621262458472,
+            "precision": 0.42788461538461536,
+            "recall_ci95": [
+              0.5249979235880399,
+              0.6390008349910361
+            ]
+          },
+          "criterion_only": {
+            "caught": 104.8,
+            "missed": 196.2,
+            "false_alarms": 311.2,
+            "recall": 0.34831945463174696,
+            "precision": 0.25202922077922074,
+            "recall_ci95": [
+              0.2956830814042004,
+              0.40130515846754866
+            ]
+          },
+          "random": {
+            "caught": 60.2,
+            "missed": 240.8,
+            "false_alarms": 355.8,
+            "recall": 0.1999038923594426,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 301.0,
+            "missed": 0.0,
+            "false_alarms": 115.0,
+            "recall": 1.0,
+            "precision": 0.7235576923076923
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.1717030766675097,
+            0.29892227919372216
+          ]
+        },
+        {
+          "capacity_share": 0.3,
+          "n_reviewed": 624,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 214.0,
+            "missed": 87.0,
+            "false_alarms": 410.0,
+            "recall": 0.7109634551495017,
+            "precision": 0.34294871794871795,
+            "recall_ci95": [
+              0.6575115530615613,
+              0.7619083476764199
+            ]
+          },
+          "criterion_only": {
+            "caught": 145.4,
+            "missed": 155.6,
+            "false_alarms": 478.6,
+            "recall": 0.4830501802837304,
+            "precision": 0.23300978247660714,
+            "recall_ci95": [
+              0.42698821260969594,
+              0.5391222785313151
+            ]
+          },
+          "random": {
+            "caught": 90.3,
+            "missed": 210.7,
+            "false_alarms": 533.7,
+            "recall": 0.29985583853916387,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 301.0,
+            "missed": 0.0,
+            "false_alarms": 323.0,
+            "recall": 1.0,
+            "precision": 0.4823717948717949
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.17349612920956095,
+            0.28837435041256804
+          ]
+        },
+        {
+          "capacity_share": 0.5,
+          "n_reviewed": 1040,
+          "n_unsafe": 301,
+          "grader": {
+            "caught": 259.0,
+            "missed": 42.0,
+            "false_alarms": 781.0,
+            "recall": 0.8604651162790697,
+            "precision": 0.24903846153846154,
+            "recall_ci95": [
+              0.8206871196754564,
+              0.8996665632754343
+            ]
+          },
+          "criterion_only": {
+            "caught": 229.8,
+            "missed": 71.2,
+            "false_alarms": 810.2,
+            "recall": 0.7635584089072461,
+            "precision": 0.22099142411642414,
+            "recall_ci95": [
+              0.7061727389201806,
+              0.8087586169049699
+            ]
+          },
+          "random": {
+            "caught": 150.4,
+            "missed": 150.6,
+            "false_alarms": 889.6,
+            "recall": 0.49975973089860654,
+            "precision": 0.1446419990389236
+          },
+          "perfect": {
+            "caught": 301.0,
+            "missed": 0.0,
+            "false_alarms": 739.0,
+            "recall": 1.0,
+            "precision": 0.28942307692307695
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.056771911048727156,
+            0.14192116067442315
+          ]
+        }
+      ],
+      "share_to_review_for_recall": {
+        "0.5": {
+          "grader": 0.1600192215281115,
+          "criterion_only": 0.3142719846227775,
+          "random": 0.5002402691013935,
+          "perfect": 0.07256126862085535
+        },
+        "0.8": {
+          "grader": 0.4142239308024988,
+          "criterion_only": 0.5631907736665065,
+          "random": 0.8000961076405574,
+          "perfect": 0.1158097068716963
+        }
+      }
+    },
+    "sensitivity_contested_is_unsafe": {
+      "n_positive": 791,
+      "ranking_quality": {
+        "grader": {
+          "roc_auc": 0.740073893315301,
+          "average_precision": 0.6744772320510857
+        },
+        "criterion_only": {
+          "roc_auc": 0.6617004282676232,
+          "average_precision": 0.5135210052640871
+        },
+        "base_rate": 0.38010571840461316
+      },
+      "capacity": [
+        {
+          "capacity_share": 0.01,
+          "n_reviewed": 21,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 21.0,
+            "missed": 770.0,
+            "false_alarms": 0.0,
+            "recall": 0.02654867256637168,
+            "precision": 1.0,
+            "recall_ci95": [
+              0.024704758105461664,
+              0.02857142857142857
+            ]
+          },
+          "criterion_only": {
+            "caught": 13.1,
+            "missed": 777.9,
+            "false_alarms": 7.9,
+            "recall": 0.016534699580810434,
+            "precision": 0.6228070175438597,
+            "recall_ci95": [
+              0.013843016374764946,
+              0.019138808124376884
+            ]
+          },
+          "random": {
+            "caught": 8.0,
+            "missed": 783.0,
+            "false_alarms": 13.0,
+            "recall": 0.010091302258529554,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 21.0,
+            "missed": 770.0,
+            "false_alarms": 0.0,
+            "recall": 0.02654867256637168,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.007314409980017967,
+            0.01305783195956775
+          ]
+        },
+        {
+          "capacity_share": 0.02,
+          "n_reviewed": 42,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 41.0,
+            "missed": 750.0,
+            "false_alarms": 1.0,
+            "recall": 0.051833122629582805,
+            "precision": 0.9761904761904762,
+            "recall_ci95": [
+              0.047380439433959476,
+              0.05601252489658342
+            ]
+          },
+          "criterion_only": {
+            "caught": 26.2,
+            "missed": 764.8,
+            "false_alarms": 15.8,
+            "recall": 0.03306939916162087,
+            "precision": 0.6228070175438597,
+            "recall_ci95": [
+              0.027686032749529892,
+              0.038169564392401885
+            ]
+          },
+          "random": {
+            "caught": 16.0,
+            "missed": 775.0,
+            "false_alarms": 26.0,
+            "recall": 0.020182604517059107,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 42.0,
+            "missed": 749.0,
+            "false_alarms": 0.0,
+            "recall": 0.05309734513274336,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.012729091923397582,
+            0.02479786132356711
+          ]
+        },
+        {
+          "capacity_share": 0.05,
+          "n_reviewed": 104,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 94.0,
+            "missed": 697.0,
+            "false_alarms": 10.0,
+            "recall": 0.11883691529709228,
+            "precision": 0.9038461538461539,
+            "recall_ci95": [
+              0.10788501800682776,
+              0.1300815678984648
+            ]
+          },
+          "criterion_only": {
+            "caught": 64.8,
+            "missed": 726.2,
+            "false_alarms": 39.2,
+            "recall": 0.08188613125734692,
+            "precision": 0.6228070175438597,
+            "recall_ci95": [
+              0.06866856131172144,
+              0.09400583694111726
+            ]
+          },
+          "random": {
+            "caught": 39.5,
+            "missed": 751.5,
+            "false_alarms": 64.5,
+            "recall": 0.04997597308986064,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 104.0,
+            "missed": 687.0,
+            "false_alarms": 0.0,
+            "recall": 0.13147914032869784,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.02556394098465484,
+            0.05125072605445599
+          ]
+        },
+        {
+          "capacity_share": 0.1,
+          "n_reviewed": 208,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 175.0,
+            "missed": 616.0,
+            "false_alarms": 33.0,
+            "recall": 0.22123893805309736,
+            "precision": 0.8413461538461539,
+            "recall_ci95": [
+              0.205430460739082,
+              0.24038592896174865
+            ]
+          },
+          "criterion_only": {
+            "caught": 122.6,
+            "missed": 668.4,
+            "false_alarms": 85.4,
+            "recall": 0.1549751780703648,
+            "precision": 0.5893527204502814,
+            "recall_ci95": [
+              0.1377092946873801,
+              0.1710958474902322
+            ]
+          },
+          "random": {
+            "caught": 79.1,
+            "missed": 711.9,
+            "false_alarms": 128.9,
+            "recall": 0.09995194617972128,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 208.0,
+            "missed": 583.0,
+            "false_alarms": 0.0,
+            "recall": 0.2629582806573957,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.04823281018784647,
+            0.08706038915796808
+          ]
+        },
+        {
+          "capacity_share": 0.2,
+          "n_reviewed": 416,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 308.0,
+            "missed": 483.0,
+            "false_alarms": 108.0,
+            "recall": 0.3893805309734513,
+            "precision": 0.7403846153846154,
+            "recall_ci95": [
+              0.3628376428168614,
+              0.417691678511089
+            ]
+          },
+          "criterion_only": {
+            "caught": 236.3,
+            "missed": 554.7,
+            "false_alarms": 179.7,
+            "recall": 0.2987012987012987,
+            "precision": 0.5679632867132867,
+            "recall_ci95": [
+              0.27172275775148896,
+              0.32317432876348573
+            ]
+          },
+          "random": {
+            "caught": 158.1,
+            "missed": 632.9,
+            "false_alarms": 257.9,
+            "recall": 0.19990389235944256,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 416.0,
+            "missed": 375.0,
+            "false_alarms": 0.0,
+            "recall": 0.5259165613147914,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.06402868344129278,
+            0.12177899962649066
+          ]
+        },
+        {
+          "capacity_share": 0.3,
+          "n_reviewed": 624,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 407.0,
+            "missed": 384.0,
+            "false_alarms": 217.0,
+            "recall": 0.5145385587863464,
+            "precision": 0.6522435897435898,
+            "recall_ci95": [
+              0.4863161363839485,
+              0.5472914705946726
+            ]
+          },
+          "criterion_only": {
+            "caught": 337.5,
+            "missed": 453.5,
+            "false_alarms": 286.5,
+            "recall": 0.4266780906046099,
+            "precision": 0.5408691821606514,
+            "recall_ci95": [
+              0.39620759341327577,
+              0.4584406544899397
+            ]
+          },
+          "random": {
+            "caught": 237.2,
+            "missed": 553.8,
+            "false_alarms": 386.8,
+            "recall": 0.29985583853916387,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 624.0,
+            "missed": 167.0,
+            "false_alarms": 0.0,
+            "recall": 0.7888748419721872,
+            "precision": 1.0
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.05968479765130391,
+            0.11826514333736664
+          ]
+        },
+        {
+          "capacity_share": 0.5,
+          "n_reviewed": 1040,
+          "n_unsafe": 791,
+          "grader": {
+            "caught": 564.0,
+            "missed": 227.0,
+            "false_alarms": 476.0,
+            "recall": 0.7130214917825537,
+            "precision": 0.5423076923076923,
+            "recall_ci95": [
+              0.6821603042270001,
+              0.7454174868766404
+            ]
+          },
+          "criterion_only": {
+            "caught": 524.7,
+            "missed": 266.3,
+            "false_alarms": 515.3,
+            "recall": 0.6633153380940991,
+            "precision": 0.5045023388773389,
+            "recall_ci95": [
+              0.6297032243445057,
+              0.6953636774020059
+            ]
+          },
+          "random": {
+            "caught": 395.3,
+            "missed": 395.7,
+            "false_alarms": 644.7,
+            "recall": 0.4997597308986064,
+            "precision": 0.38010571840461316
+          },
+          "perfect": {
+            "caught": 791.0,
+            "missed": 0.0,
+            "false_alarms": 249.0,
+            "recall": 1.0,
+            "precision": 0.760576923076923
+          },
+          "grader_minus_criterion_only_recall_ci95": [
+            0.022284826925746192,
+            0.07665817867492693
+          ]
+        }
+      ],
+      "share_to_review_for_recall": {
+        "0.5": {
+          "grader": 0.2868813070639116,
+          "criterion_only": 0.35271504084574723,
+          "random": 0.5002402691013935,
+          "perfect": 0.19029312830370015
+        },
+        "0.8": {
+          "grader": 0.6266218164344065,
+          "criterion_only": 0.6852474771744353,
+          "random": 0.8000961076405574,
+          "perfect": 0.30418068236424795
+        }
+      }
+    }
+  },
+  "cost_per_1000_screened_answers": {
+    "ASSUMPTIONS": {
+      "minutes_per_review": 4.0,
+      "physician_cost_per_hour_eur": 90.0,
+      "model_cost_per_1000_eur": 0.0,
+      "note": "illustrative, not measured; change in the demo"
+    },
+    "unsafe_rate_measured": 0.14090300363497227,
+    "by_capacity": [
+      {
+        "capacity_share": 0.01,
+        "grader": {
+          "reviews": 10.0,
+          "doctor_hours": 0.6666666666666666,
+          "review_cost_eur": 60.0,
+          "unsafe_caught": 8.130859001339202,
+          "cost_per_unsafe_caught_eur": 7.379294117647057
+        },
+        "criterion_only": {
+          "reviews": 10.0,
+          "doctor_hours": 0.6666666666666666,
+          "review_cost_eur": 60.0,
+          "unsafe_caught": 3.0673300424213754,
+          "cost_per_unsafe_caught_eur": 19.560985994397758
+        },
+        "random": {
+          "reviews": 10.0,
+          "doctor_hours": 0.6666666666666666,
+          "review_cost_eur": 60.0,
+          "unsafe_caught": 1.4152300919908254,
+          "cost_per_unsafe_caught_eur": 42.395932887207834
+        },
+        "perfect": {
+          "reviews": 10.0,
+          "doctor_hours": 0.6666666666666666,
+          "review_cost_eur": 60.0,
+          "unsafe_caught": 10.044002295771953,
+          "cost_per_unsafe_caught_eur": 5.973714285714285
+        }
+      },
+      {
+        "capacity_share": 0.02,
+        "grader": {
+          "reviews": 20.0,
+          "doctor_hours": 1.3333333333333333,
+          "review_cost_eur": 120.0,
+          "unsafe_caught": 14.826860531853836,
+          "cost_per_unsafe_caught_eur": 8.09341935483871
+        },
+        "criterion_only": {
+          "reviews": 20.0,
+          "doctor_hours": 1.3333333333333333,
+          "review_cost_eur": 120.0,
+          "unsafe_caught": 6.217715706906447,
+          "cost_per_unsafe_caught_eur": 19.299692307692307
+        },
+        "random": {
+          "reviews": 20.0,
+          "doctor_hours": 1.3333333333333333,
+          "review_cost_eur": 120.0,
+          "unsafe_caught": 2.8169818021531667,
+          "cost_per_unsafe_caught_eur": 42.59878424073514
+        },
+        "perfect": {
+          "reviews": 20.0,
+          "doctor_hours": 1.3333333333333333,
+          "review_cost_eur": 120.0,
+          "unsafe_caught": 19.99234742682227,
+          "cost_per_unsafe_caught_eur": 6.002296650717703
+        }
+      },
+      {
+        "capacity_share": 0.05,
+        "grader": {
+          "reviews": 50.0,
+          "doctor_hours": 3.3333333333333335,
+          "review_cost_eur": 300.0,
+          "unsafe_caught": 32.61909317007844,
+          "cost_per_unsafe_caught_eur": 9.19706744868035
+        },
+        "criterion_only": {
+          "reviews": 50.0,
+          "doctor_hours": 3.3333333333333335,
+          "review_cost_eur": 300.0,
+          "unsafe_caught": 16.65693313060727,
+          "cost_per_unsafe_caught_eur": 18.010518361795377
+        },
+        "random": {
+          "reviews": 50.0,
+          "doctor_hours": 3.3333333333333335,
+          "review_cost_eur": 300.0,
+          "unsafe_caught": 7.049193696297159,
+          "cost_per_unsafe_caught_eur": 42.55805882559103
+        },
+        "perfect": {
+          "reviews": 50.0,
+          "doctor_hours": 3.3333333333333335,
+          "review_cost_eur": 300.0,
+          "unsafe_caught": 50.028697149416494,
+          "cost_per_unsafe_caught_eur": 5.996558317399617
+        }
+      },
+      {
+        "capacity_share": 0.1,
+        "grader": {
+          "reviews": 100.0,
+          "doctor_hours": 6.666666666666667,
+          "review_cost_eur": 600.0,
+          "unsafe_caught": 53.37669791467381,
+          "cost_per_unsafe_caught_eur": 11.240860215053763
+        },
+        "criterion_only": {
+          "reviews": 100.0,
+          "doctor_hours": 6.666666666666667,
+          "review_cost_eur": 600.0,
+          "unsafe_caught": 29.488228300201527,
+          "cost_per_unsafe_caught_eur": 20.34710237223372
+        },
+        "random": {
+          "reviews": 100.0,
+          "doctor_hours": 6.666666666666667,
+          "review_cost_eur": 600.0,
+          "unsafe_caught": 14.084909010765832,
+          "cost_per_unsafe_caught_eur": 42.59878424073515
+        },
+        "perfect": {
+          "reviews": 100.0,
+          "doctor_hours": 6.666666666666667,
+          "review_cost_eur": 600.0,
+          "unsafe_caught": 99.96173713411135,
+          "cost_per_unsafe_caught_eur": 6.002296650717703
+        }
+      },
+      {
+        "capacity_share": 0.2,
+        "grader": {
+          "reviews": 200.0,
+          "doctor_hours": 13.333333333333334,
+          "review_cost_eur": 1200.0,
+          "unsafe_caught": 78.43887507174287,
+          "cost_per_unsafe_caught_eur": 15.298536585365854
+        },
+        "criterion_only": {
+          "reviews": 200.0,
+          "doctor_hours": 13.333333333333334,
+          "review_cost_eur": 1200.0,
+          "unsafe_caught": 50.389920009204495,
+          "cost_per_unsafe_caught_eur": 23.814286662507136
+        },
+        "random": {
+          "reviews": 200.0,
+          "doctor_hours": 13.333333333333334,
+          "review_cost_eur": 1200.0,
+          "unsafe_caught": 28.183296403360156,
+          "cost_per_unsafe_caught_eur": 42.578411794900255
+        },
+        "perfect": {
+          "reviews": 200.0,
+          "doctor_hours": 13.333333333333334,
+          "review_cost_eur": 1200.0,
+          "unsafe_caught": 140.90300363497226,
+          "cost_per_unsafe_caught_eur": 8.516496945010182
+        }
+      },
+      {
+        "capacity_share": 0.3,
+        "grader": {
+          "reviews": 300.0,
+          "doctor_hours": 20.0,
+          "review_cost_eur": 1800.0,
+          "unsafe_caught": 96.13545054524583,
+          "cost_per_unsafe_caught_eur": 18.72358208955224
+        },
+        "criterion_only": {
+          "reviews": 300.0,
+          "doctor_hours": 20.0,
+          "review_cost_eur": 1800.0,
+          "unsafe_caught": 70.09956911444309,
+          "cost_per_unsafe_caught_eur": 25.67776125786676
+        },
+        "random": {
+          "reviews": 300.0,
+          "doctor_hours": 20.0,
+          "review_cost_eur": 1800.0,
+          "unsafe_caught": 42.26820541412599,
+          "cost_per_unsafe_caught_eur": 42.58520044474001
+        },
+        "perfect": {
+          "reviews": 300.0,
+          "doctor_hours": 20.0,
+          "review_cost_eur": 1800.0,
+          "unsafe_caught": 140.90300363497226,
+          "cost_per_unsafe_caught_eur": 12.774745417515275
+        }
+      },
+      {
+        "capacity_share": 0.5,
+        "grader": {
+          "reviews": 500.0,
+          "doctor_hours": 33.333333333333336,
+          "review_cost_eur": 3000.0,
+          "unsafe_caught": 118.9018557489956,
+          "cost_per_unsafe_caught_eur": 25.230893000804507
+        },
+        "criterion_only": {
+          "reviews": 500.0,
+          "doctor_hours": 33.333333333333336,
+          "review_cost_eur": 3000.0,
+          "unsafe_caught": 105.48252206947444,
+          "cost_per_unsafe_caught_eur": 28.440730664593858
+        },
+        "random": {
+          "reviews": 500.0,
+          "doctor_hours": 33.333333333333336,
+          "review_cost_eur": 3000.0,
+          "unsafe_caught": 70.45150181748613,
+          "cost_per_unsafe_caught_eur": 42.58248472505092
+        },
+        "perfect": {
+          "reviews": 500.0,
+          "doctor_hours": 33.333333333333336,
+          "review_cost_eur": 3000.0,
+          "unsafe_caught": 140.90300363497226,
+          "cost_per_unsafe_caught_eur": 21.29124236252546
+        }
+      }
+    ]
+  }
+}

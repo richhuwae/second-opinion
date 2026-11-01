@@ -18,7 +18,11 @@ import pandas as pd
 
 @dataclass(frozen=True)
 class CostAssumptions:
-    """Illustrative defaults, not Doctolib figures. Adjust in the demo."""
+    """ASSUMPTIONS, not measured: illustrative defaults, not any company's figures.
+
+    4 minutes per review and EUR 90 per physician hour are placeholders chosen
+    for illustration. Adjust them in the demo.
+    """
 
     minutes_per_review: float = 4.0
     physician_cost_per_hour_eur: float = 90.0
@@ -27,6 +31,26 @@ class CostAssumptions:
     @property
     def cost_per_review_eur(self) -> float:
         return self.minutes_per_review / 60 * self.physician_cost_per_hour_eur
+
+
+def expected_caught(scores: np.ndarray, is_unsafe: np.ndarray, n_review: int) -> float:
+    """Unsafe items caught when reviewing the ``n_review`` highest scores.
+
+    Ties at the cut-off are broken at random; this returns the exact expected
+    count, so scores with few distinct values (e.g. one per criterion) are not
+    helped or hurt by row order. Constant scores give the random-sample rate.
+    """
+    scores = np.asarray(scores, dtype=float)
+    is_unsafe = np.asarray(is_unsafe, dtype=bool)
+    if n_review <= 0:
+        return 0.0
+    if n_review >= scores.size:
+        return float(is_unsafe.sum())
+    cutoff = np.sort(scores)[::-1][n_review - 1]
+    above = scores > cutoff
+    tier = scores == cutoff
+    slots = n_review - int(above.sum())
+    return float(is_unsafe[above].sum() + slots * is_unsafe[tier].mean())
 
 
 def review_outcome(

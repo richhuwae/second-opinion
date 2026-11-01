@@ -61,3 +61,12 @@ def test_theme_and_high_stakes():
                                        {"points": -9, "tags": ["level:cluster"]}]},
     ]
     assert high_stakes_conversations(ev) == {"x"}
+
+
+def test_labels_doc_lists_every_safety_criterion():
+    from pathlib import Path
+
+    doc = (Path(__file__).resolve().parents[1] / "docs" / "labels.md").read_text()
+    for name in SAFETY_CRITERIA:
+        assert f"`{name.removeprefix('cluster:')}`" in doc
+    assert len(SAFETY_CRITERIA) == 12
