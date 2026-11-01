@@ -44,7 +44,7 @@ The project deliberately ties together:
 
 1. Routing: cheap model for clear cases, escalation for uncertain ones, then a doctor
 2. Doctor feedback → training examples ("bad answer / better answer" pairs)
-3. Stronger cheap model: gradient boosting or a small PyTorch network on text embeddings
+3. Stronger cheap model: a small PyTorch network on text embeddings (gradient boosting is already in C2)
 4. Failure analysis: cluster the cases where graders disagree with physicians
 5. LLM judge: rubric-based grading, bias tests (answer length, order), voting across judges
 6. French-language slice, if the data has enough French conversations
@@ -81,7 +81,7 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Headline metric: HealthBench pairwise balanced F1, verified against OpenAI's reference code |
 | 2026-11-01 | Downloader verifies SHA-256 and falls back to OpenAI's Hugging Face copy of the same files |
 | 2026-11-01 | C2 baselines: constant answers and a rubric-only model that never reads the answer; a grader must beat both |
-| 2026-11-01 | C2 candidates: TF-IDF + logistic regression, and gradient-boosted trees on SVD text features (both classical, no embeddings); optional #3 stays the embeddings/PyTorch variant |
+| 2026-11-01 | C2 candidates: TF-IDF + logistic regression, and gradient-boosted trees on SVD text features (both classical, no embeddings); confirmed by owner. Optional #3 is now only the small PyTorch network on text embeddings |
 | 2026-11-01 | Train on soft labels (share of physicians who said "met"); split, CV and bootstrap all grouped by conversation |
 
 ## Data facts (from OpenAI's reference loader)
