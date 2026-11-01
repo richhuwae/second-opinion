@@ -17,6 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+docs = ["matplotlib>=3.8"]  # scripts/make_figures.py only
 
 [build-system]
 requires = ["setuptools>=69"]
