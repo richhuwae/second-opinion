@@ -1,3 +1,4 @@
+import hashlib
 import json
 
 import pandas as pd
@@ -55,3 +56,30 @@ def test_rejects_mismatched_physician_ids(tmp_path):
     bad = [dict(ROWS[0], anonymized_physician_ids=["a"])]
     with pytest.raises(ValueError, match="physician ids"):
         load_meta_eval(_write(tmp_path, bad))
+
+
+def _fake_mirrors(tmp_path, monkeypatch, content: bytes):
+    from second_opinion import data
+
+    good, empty = tmp_path / "good", tmp_path / "empty"
+    good.mkdir()
+    empty.mkdir()
+    (good / "f.jsonl").write_bytes(content)
+    monkeypatch.setattr(data, "FILES", {"x": "f.jsonl"})
+    monkeypatch.setattr(data, "SHA256", {"x": hashlib.sha256(b"expected").hexdigest()})
+    monkeypatch.setattr(data, "MIRRORS", (empty.as_uri(), good.as_uri()))
+    return data
+
+
+def test_download_falls_back_to_next_mirror_and_verifies(tmp_path, monkeypatch):
+    data = _fake_mirrors(tmp_path, monkeypatch, b"expected")
+    path = data.download("x", dest_dir=tmp_path / "out")
+    assert path.read_bytes() == b"expected"
+    assert data.download("x", dest_dir=tmp_path / "out") == path  # cached, re-verified
+
+
+def test_download_rejects_checksum_mismatch(tmp_path, monkeypatch):
+    data = _fake_mirrors(tmp_path, monkeypatch, b"tampered")
+    with pytest.raises(OSError, match="checksum mismatch"):
+        data.download("x", dest_dir=tmp_path / "out")
+    assert not list((tmp_path / "out").iterdir())  # nothing half-written left behind

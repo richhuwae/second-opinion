@@ -11,18 +11,29 @@ https://github.com/openai/simple-evals/blob/main/healthbench_meta_eval.py
 
 from __future__ import annotations
 
+import hashlib
 import json
 import urllib.request
 from pathlib import Path
 
 import pandas as pd
 
-BASE_URL = "https://openaipublic.blob.core.windows.net/simple-evals/healthbench"
+# The same files are published by OpenAI in two places; we try them in order.
+MIRRORS = (
+    "https://openaipublic.blob.core.windows.net/simple-evals/healthbench",
+    "https://huggingface.co/datasets/openai/healthbench/resolve/main",
+)
 FILES = {
     # Physician-graded answers: the ground truth for grader agreement.
-    "meta_eval": f"{BASE_URL}/2025-05-07-06-14-12_oss_meta_eval.jsonl",
+    "meta_eval": "2025-05-07-06-14-12_oss_meta_eval.jsonl",
     # Full benchmark: conversations with their complete rubrics and theme tags.
-    "eval": f"{BASE_URL}/2025-05-07-06-14-12_oss_eval.jsonl",
+    "eval": "2025-05-07-06-14-12_oss_eval.jsonl",
+}
+# SHA-256 of each file, as listed by the openai/healthbench Hugging Face repo.
+# Checked after every download so a mirror can never silently change the data.
+SHA256 = {
+    "meta_eval": "6a343ed3fcb6f28353c2c6c157ae30ddf2db874c947b27ba474ad54da9c5dbac",
+    "eval": "e99dd3c6372c10d6fcc5e385c5fae69d0dd40392dae56836ef9493ae324ecd2f",
 }
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data" / "raw"
@@ -37,20 +48,45 @@ META_EVAL_REQUIRED = {
 }
 
 
+def sha256sum(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        while chunk := f.read(1 << 20):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def download(name: str, dest_dir: Path = DATA_DIR, overwrite: bool = False) -> Path:
-    """Download one HealthBench file to ``dest_dir`` and return its path."""
+    """Download one HealthBench file to ``dest_dir``, verify it, and return its path.
+
+    Tries each mirror in ``MIRRORS`` in turn. Raises ``OSError`` if none works.
+    """
     if name not in FILES:
         raise KeyError(f"Unknown file {name!r}; expected one of {sorted(FILES)}")
     dest_dir.mkdir(parents=True, exist_ok=True)
-    path = dest_dir / FILES[name].rsplit("/", 1)[-1]
+    path = dest_dir / FILES[name]
     if path.exists() and not overwrite:
+        if sha256sum(path) != SHA256[name]:
+            raise OSError(f"{path} exists but its checksum is wrong; delete it and retry")
         return path
     tmp = path.with_suffix(".part")
-    with urllib.request.urlopen(FILES[name], timeout=120) as resp, open(tmp, "wb") as f:
-        while chunk := resp.read(1 << 20):
-            f.write(chunk)
-    tmp.replace(path)
-    return path
+    errors = []
+    for base in MIRRORS:
+        url = f"{base}/{FILES[name]}"
+        try:
+            with urllib.request.urlopen(url, timeout=120) as resp, open(tmp, "wb") as f:
+                while chunk := resp.read(1 << 20):
+                    f.write(chunk)
+        except OSError as exc:
+            errors.append(f"{url}: {exc}")
+            continue
+        if sha256sum(tmp) != SHA256[name]:
+            errors.append(f"{url}: checksum mismatch")
+            tmp.unlink()
+            continue
+        tmp.replace(path)
+        return path
+    raise OSError("all mirrors failed:\n  " + "\n  ".join(errors))
 
 
 def read_jsonl(path: Path) -> list[dict]:
