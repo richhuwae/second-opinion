@@ -79,6 +79,10 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Public repository; MIT licence |
 | 2026-11-01 | Data: HealthBench meta-eval (MIT); no real patient data |
 | 2026-11-01 | Headline metric: HealthBench pairwise balanced F1, verified against OpenAI's reference code |
+| 2026-11-01 | Downloader verifies SHA-256 and falls back to OpenAI's Hugging Face copy of the same files |
+| 2026-11-01 | C2 baselines: constant answers and a rubric-only model that never reads the answer; a grader must beat both |
+| 2026-11-01 | C2 candidates: TF-IDF + logistic regression, and gradient-boosted trees on SVD text features (both classical, no embeddings); optional #3 stays the embeddings/PyTorch variant |
+| 2026-11-01 | Train on soft labels (share of physicians who said "met"); split, CV and bootstrap all grouped by conversation |
 
 ## Data facts (from OpenAI's reference loader)
 
@@ -90,9 +94,10 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
 ## Status
 
 - [x] Repo skeleton, loader, trust metrics, review-budget simulation, 213 passing tests
-- [ ] Download data (needs `openaipublic.blob.core.windows.net` allowed in the environment's network settings)
-- [ ] C1 exploration and label definitions
-- [ ] C2 classical grader
+- [ ] Download data. Needs `openaipublic.blob.core.windows.net` or, for the Hugging Face copy,
+      `huggingface.co` + `us.aws.cdn.hf.co` allowed. A policy change seems to apply only to new sessions.
+- [ ] C1 exploration and label definitions (`scripts/explore_data.py` ready; needs data)
+- [~] C2 classical grader: code, protocol and tests done on synthetic data; not yet run on HealthBench
 - [ ] C3–C5 results
 - [ ] C6 demo
 - [ ] C7 write-up
