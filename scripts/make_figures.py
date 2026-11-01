@@ -25,7 +25,8 @@ OUT = ROOT / "docs" / "figures" / "caught_vs_capacity.png"
 CSV = OUT.with_suffix(".csv")
 
 # Reference categorical palette (blue, orange) for the two learned rankings;
-# the two reference policies are neutral greys, dashed.
+# the two reference policies are neutral greys, dashed. No legend: each line
+# is labelled at its end.
 STYLE = {
     "grader": dict(color="#2a78d6", lw=2.4, ls="-", marker="o"),
     "criterion_only": dict(color="#eb6834", lw=2.0, ls="-", marker="o"),
@@ -51,9 +52,9 @@ def main() -> int:
         xs = [d["capacity_share"] for d in pts if d["policy"] == p and d["capacity_share"] <= xmax + 1e-9]
         ys = [d["recall"] for d in pts if d["policy"] == p and d["capacity_share"] <= xmax + 1e-9]
         st = STYLE[p]
-        ax.plot(xs, ys, color=st["color"], lw=st["lw"], ls=st["ls"], label=POLICY_LABELS[p], zorder=3,
+        ax.plot(xs, ys, color=st["color"], lw=st["lw"], ls=st["ls"], zorder=3,
                 marker=st["marker"], markersize=4.5, markeredgecolor="white", markeredgewidth=1)
-        ax.annotate(POLICY_LABELS[p].replace(" (upper bound)", "").replace(" (today)", ""),
+        ax.annotate(POLICY_LABELS[p].replace(" (upper bound)", "\n(upper bound)").replace(" (today)", "\n(today)"),
                     (xs[-1], ys[-1]), xytext=(6, 0), textcoords="offset points",
                     va="center", fontsize=9.5, color=INK)
     ax.axvline(0.10, color=MUTED, lw=0.8, zorder=1)
@@ -72,7 +73,6 @@ def main() -> int:
     for s in ("left", "bottom"):
         ax.spines[s].set_color(GRID)
     ax.tick_params(colors=MUTED)
-    ax.legend(loc="lower right", frameon=False, fontsize=9.5)
     fig.text(0.01, 0.005, "HealthBench meta-eval, held-out (out-of-fold) risk scores. "
              "Points: values in results/safety_alarm.json; lines join them.",
              fontsize=7.5, color=MUTED)

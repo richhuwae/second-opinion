@@ -54,6 +54,7 @@ def test_unmarked_numbers_catches_strays():
 def test_readme_headline_quotes_the_four_policies():
     head = (REPO / "README.md").read_text().split("![")[0]
     keys = {k for k, _ in NUMBER.findall(head)}
+    assert "ratio_10_grader_vs_random" in keys
     for p in ("grader", "random", "criterion_only", "perfect"):
         assert f"share_for_50_{p}" in keys and f"recall_10_{p}" in keys
 

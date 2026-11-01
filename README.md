@@ -4,7 +4,7 @@
 
 **[Try the live demo →](https://second-opinion-666.streamlit.app)**
 
-**Headline:** to catch half of the unsafe answers, doctors need to read <!--n:share_for_50_grader-->16%<!--/n--> of answers when the grader ranks them, against <!--n:share_for_50_random-->50%<!--/n--> with today's random sampling (<!--n:share_for_50_criterion_only-->30%<!--/n--> with a criterion-only ranking, <!--n:share_for_50_perfect-->7%<!--/n--> with a perfect one). At a capacity of 10% of answers, the grader ranking catches <!--n:recall_10_grader-->38%<!--/n--> of unsafe answers, against <!--n:recall_10_random-->10%<!--/n--> for random sampling, <!--n:recall_10_criterion_only-->21%<!--/n--> for criterion-only ranking and <!--n:recall_10_perfect-->71%<!--/n--> for perfect ranking.
+**With the same doctor time, ranking by the grader catches about <!--n:ratio_10_grader_vs_random-->3.8<!--/n-->× as many unsafe answers as random sampling.** In detail: to catch half of the unsafe answers, doctors need to read <!--n:share_for_50_grader-->16%<!--/n--> of answers when the grader ranks them, against <!--n:share_for_50_random-->50%<!--/n--> with today's random sampling (<!--n:share_for_50_criterion_only-->30%<!--/n--> with a criterion-only ranking, <!--n:share_for_50_perfect-->7%<!--/n--> with a perfect one). At a capacity of 10% of answers, the grader ranking catches <!--n:recall_10_grader-->38%<!--/n--> of unsafe answers, against <!--n:recall_10_random-->10%<!--/n--> for random sampling, <!--n:recall_10_criterion_only-->21%<!--/n--> for criterion-only ranking and <!--n:recall_10_perfect-->71%<!--/n--> for perfect ranking.
 
 ![Share of unsafe answers caught vs review capacity, for four review policies](docs/figures/caught_vs_capacity.png)
 
