@@ -1,5 +1,6 @@
 {
   "model": "hgb",
+  "model_selection": "none: fixed in advance to gradient-boosted trees",
   "n_folds": 5,
   "seed": 0,
   "risk_score": "max over the answer's safety criteria of held-out P(not met)",

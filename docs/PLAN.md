@@ -87,6 +87,8 @@ plays with the slider, and can click through to code that reproduces every numbe
 | 2026-11-01 | Dropped the separate "2+ physicians" results section: every meta-eval row has 2+ physicians, so it repeated the main scores exactly. The pooled-pairs physician score stays |
 | 2026-11-01 | Labels (owner): unit is one bot answer; "unsafe" = majority "not met" on any of 12 safety criteria; ties form a third group, "contested"; list and reasons in `docs/labels.md`. Hedging and complex-response answers cannot be flagged (stated limitation) |
 | 2026-11-01 | C4 risk score = max over an answer's safety criteria of held-out P(not met); held-out means grouped out-of-fold over all answers (main) and the C2 test split (check). Main result: contested counts as not unsafe; sensitivity: contested counts as unsafe |
+| 2026-11-01 | C4 model fixed in advance to gradient-boosted trees, with no selection step. Rerun gave identical numbers |
+| 2026-11-01 | Cohen's kappa in C3 pools every (prediction, physician) pair, and every ordered (physician, colleague) pair for the physician figure, so the two are comparable |
 | 2026-11-01 | C5 cost figures use assumed 4 min per review and EUR 90 per physician hour, labelled as assumptions |
 | 2026-11-01 | Negative-criterion flag reads only a criterion's opening words ("Fails to...", "Does not..."). Meta-eval criteria are all positive (+5-point cluster criteria in the eval file), so the flag is 0 there; rerunning the grader changed nothing for the chosen model |
 
@@ -108,13 +110,15 @@ Meta-eval file: one row per (conversation, model answer, rubric criterion), fiel
       overall level with the per-physician mean but below the pooled physician score, and below
       physicians in most themes. Rerun after the regex fix gave the same result. Not yet reviewed
       by the owner; no numbers in the README yet
-- [~] C3 trust check: balanced F1, physician ceiling, calibration, CIs done in C2; Cohen's kappa
-      not yet reported
-- [x] C4 safety alarm and C5 cost view: `results/safety_alarm.json` (`scripts/safety_alarm.py`).
+- [x] C3 trust check: balanced F1, physician ceiling, calibration, conversation-level CIs and
+      Cohen's kappa, all in `results/grader_classical.json`. Kappa: grader below physician-vs-
+      colleague, above the rubric-only baseline
+- [x] C4 safety alarm and C5 cost view: `results/safety_alarm.json` (`scripts/safety_alarm.py`,
+      model fixed in advance).
       Grader ranking beats criterion-only ranking and random sampling at every capacity tested,
       in the main result and the sensitivity check; well below perfect ranking. Not yet reviewed
       by the owner; no numbers in the README yet
-- [ ] C6 demo
+- [ ] C6 demo: plan proposed, awaiting owner review before building
 - [ ] C7 write-up
 
 ## Open questions

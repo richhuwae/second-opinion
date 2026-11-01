@@ -39,8 +39,13 @@
       0.6733023116493805,
       0.7018104785474168
     ],
+    "kappa_vs_physicians": 0.37473984481732414,
+    "kappa_ci95": [
+      0.34711929341972336,
+      0.4039008006854008
+    ],
     "ece_vs_physicians": 0.010206344506780493,
-    "seconds_per_1000_rows": 1.1211591121289288
+    "seconds_per_1000_rows": 1.0302633745547214
   },
   "baselines": {
     "always_met": null,
@@ -49,6 +54,11 @@
     "rubric_only_ci95": [
       0.6244448246975548,
       0.6536927090773224
+    ],
+    "rubric_only_kappa": 0.27725815053412606,
+    "rubric_only_kappa_ci95": [
+      0.24989718650346568,
+      0.3084909693788752
     ]
   },
   "physician_ceiling": {
@@ -59,6 +69,7 @@
     "max": 0.9499105545617174
   },
   "physician_pooled_f1": 0.7033569014024652,
+  "physician_pooled_kappa": 0.4067138028049305,
   "by_category": [
     {
       "category": "cluster:communication_health-professional_accuracy_completeness",
